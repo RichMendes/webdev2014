@@ -30,7 +30,7 @@
 
   <?php 
   	$project_name = 'Project Two';
-  	include './proj-body.php'; 
+  	include './inc/proj-body.php'; 
   ?>
   
     <!-- Bootstrap core JavaScript

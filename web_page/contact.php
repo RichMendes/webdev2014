@@ -28,7 +28,7 @@
 
   <body style="">
 
-	<?php include 'nav-bar.php' ?>
+	<?php include './inc/nav-bar.php' ?>
 
     <div class="container">
 

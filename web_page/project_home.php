@@ -28,15 +28,20 @@
 
   <body style="">
 
-
-	<? include './inc/nav-bar.php'; ?>
+	<?php include './inc/nav-bar.php' ?>
 
     <div class="container">
 
       <div class="starter-template">
-        <h1>Basic Website Home Page</h1>
-        <p class="lead">Here is some basic information. <br>
-        	Click any of these buttons to go to your destination.</p>
+        <h1>Project Home Page</h1>
+        <p class="lead">Here is a list of projects:</p>
+		<div class="list-group">
+		  <a href="./project_home.php" class="list-group-item active">
+		    Project Home
+		  </a>
+		  <a href="./project1.php" class="list-group-item">Project 1</a>
+		  <a href="./project2.php" class="list-group-item">Project 2</a>
+		</div>
       </div>
 
     </div><!-- /.container -->

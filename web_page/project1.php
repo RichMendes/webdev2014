@@ -28,7 +28,7 @@
 
   <?php 
   	$project_name = 'Project One';
-  	include './proj-body.php'; 
+  	include './inc/proj-body.php'; 
   ?>
   
     <!-- Bootstrap core JavaScript

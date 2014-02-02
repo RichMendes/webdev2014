@@ -28,7 +28,7 @@
 
   <body style="">
 
-	<?php include 'nav-bar.php' ?>
+	<?php include './inc/nav-bar.php' ?>
 
     <div class="container">
 
@@ -37,7 +37,7 @@
         <p class="lead">This is a basic website using html/css/js/php. <br></p>
       </div>
 
-	<?php include 'back-home.php' ?>
+	<?php include './inc/back-home.php' ?>
 
     </div><!-- /.container -->
 
