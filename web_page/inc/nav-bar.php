@@ -8,13 +8,13 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
        </button>
-       <a class="navbar-brand" href="./">Basic Website</a>
+       <a class="navbar-brand" href="./index.php">Basic Website</a>
      </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">';
-				echo  '<li id="index"><a href="./index.php">Home</a></li>';
-				echo  '<li id="about"><a href="./about.php">About</a></li>';
-				echo  '<li id="contact"><a href="./contact.php">Contact</a></li>';
+				echo  '<li id="index_tab"><a href="./index.php">Home</a></li>';
+				echo  '<li id="about_tab"><a href="./about.php">About</a></li>';
+				echo  '<li id="contact_tab"><a href="./contact.php">Contact</a></li>';
 
 			echo '<li class="dropdown">
           		<a href="./project_home.php" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
