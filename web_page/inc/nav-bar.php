@@ -12,30 +12,31 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
      </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">';
-			if (basename($_SERVER['PHP_SELF']) == 'index.php' || basename($_SERVER['PHP_SELF']) == '')
+		  	$filename = basename($_SERVER['PHP_SELF']);
+			if ($filename == 'index.php')
 				echo  '<li class="active"><a href="./index.php">Home</a></li>';
 			else
 				echo  '<li><a href="./index.php">Home</a></li>';
-			if (basename($_SERVER['PHP_SELF']) == 'about.php')
+			if ($filename == 'about.php')
 				echo  '<li class="active"><a href="./about.php">
 						About</a></li>';
 			else
 				echo  '<li><a href="./about.php">About</a></li>';
-			if (basename($_SERVER['PHP_SELF']) == 'contact.php')
+			if ($filename == 'contact.php')
 				echo  '<li class="active"><a href="./contact.php">
 						Contact</a></li>';
 			else
 				echo  '<li><a href="./contact.php">Contact</a></li>';
 
 			echo '<li class="dropdown">
-          		<a href="./project_home.php" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+          			<a href="./project_home.php" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
 	          		<ul class="dropdown-menu">
 	          			<li><a href="./project_home.php">Project Home Page</a></li>
 	          			<li class="divider"></li>
 	            		<li><a href="./project1.php">Project 1</a></li>
 	            		<li><a href="./project2.php">Project 2</a></li>
 	          		</ul>
-            </li>';					
+            	  </li>';					
 			/* Old Project Tabs	
 			else
 				echo  '<li><a href="./project1.php">
