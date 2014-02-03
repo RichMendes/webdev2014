@@ -48,5 +48,9 @@
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/nav-bar.js"></script>
-
+	<script  type="text/javascript">
+		$(function(){
+			//$(".nav-bar").addClass("active");		// .nav-bar can be any class name
+		})
+	</script>
 </body></html>
