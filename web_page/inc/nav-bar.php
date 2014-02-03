@@ -12,7 +12,7 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
      </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">';
-			if (basename($_SERVER['PHP_SELF']) == 'index.php')
+			if (basename($_SERVER['PHP_SELF']) == 'index.php' || basename($_SERVER['PHP_SELF']) == '')
 				echo  '<li class="active"><a href="./index.php">Home</a></li>';
 			else
 				echo  '<li><a href="./index.php">Home</a></li>';
