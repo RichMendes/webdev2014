@@ -12,6 +12,20 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
      </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">';
+		  
+		    //Examples of php arrayList
+		  	$exLinks = array('./contact.php', './index.php' , './about.php');
+			$links = array(
+					array('class' => 'index-menu', 'link' => 'index.php', 'title' => 'Home'),
+					array('class' => 'about-menu', 'link' => 'about.php', 'title' => 'About'),
+					array('class' => 'contact-menu', 'link' => 'contact.php', 'title' => 'Contact us')
+					);
+			/*	Different output of navbar using array	
+			foreach ($variable as $value) { ?>
+				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$value['title']?></a></la>
+			<?}
+			*/
+			
 		  	$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename == 'index.php')
 				echo  '<li class="active"><a href="./index.php">Home</a></li>';
