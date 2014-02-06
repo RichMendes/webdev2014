@@ -17,15 +17,15 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  	$exLinks = array('./contact.php', './index.php' , './about.php');
 			$links = array(
 					array('class' => 'index-menu', 'link' => 'index.php', 'title' => 'Home'),
-					array('class' => 'about-menu', 'link' => 'about.php', 'title' => 'About'),
-					array('class' => 'contact-menu', 'link' => 'contact.php', 'title' => 'Contact us')
+					array('class' => 'about-menu', 'link' => 'about.php', 'title' => 'About Us'),
+					array('class' => 'contact-menu', 'link' => 'contact.php', 'title' => 'Contact Us')
 					);
-			/*	Different output of navbar using array	
+			/*	Different output of navbar using array	*/
 			foreach ($variable as $value) { ?>
-				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$value['title']?></a></la>
+				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$value['title']?></a></li>
 			<?}
-			*/
 			
+			/*
 		  	$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename == 'index.php')
 				echo  '<li class="active"><a href="./index.php">Home</a></li>';
@@ -41,7 +41,7 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 						Contact</a></li>';
 			else
 				echo  '<li><a href="./contact.php">Contact</a></li>';
-
+			*/
 			echo '<li class="dropdown">
           			<a href="./project_home.php" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
 	          		<ul class="dropdown-menu">
