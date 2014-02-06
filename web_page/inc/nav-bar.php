@@ -13,16 +13,30 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">';
 		  
-		    //Examples of php arrayList
-		  	$exLinks = array('./contact.php', './index.php' , './about.php');
-			$variables = array(
+		    //Examples of php arrayList - OLD
+		  	/*$exLinks = array('./contact.php', './index.php' , './about.php');
+			$links = array(
 					array('class' => 'index-menu', 'link' => 'index.php', 'title' => 'Home'),
 					array('class' => 'about-menu', 'link' => 'about.php', 'title' => 'About Us'),
 					array('class' => 'contact-menu', 'link' => 'contact.php', 'title' => 'Contact Us')
 					);
+					*/
+					
+			// NEW
+			$links = array();
+			$links['Home'] = array('class' => 'index-menu', 'link' => 'index.php', 'name' => 'home');
+			$links['About Us'] = array('class' => 'about-menu', 'link' => 'about.php', 'name' => 'about');
+			$links['Contact Us'] = array('class' => 'contact-menu', 'link' => 'contact.php', 'name' => 'contact');
+			
+			//
+					
 			/*	Different output of navbar using array	*/
-			foreach ($variables as $value) { ?>
-				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$value['title']?></a></li>
+			foreach ($links as $key => $value) { ?>
+				<?
+					$class = "$value[name]-menu";
+					$links = "$value[name].php";
+				?>
+				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$key?></a></li>
 			<?}
 			
 			/*
