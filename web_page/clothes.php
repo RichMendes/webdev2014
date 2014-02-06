@@ -33,11 +33,16 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Here is the About page.</h1>
-        <p class="lead">This is a basic website using html/css/js/php. <br></p>
+        <h1>Clothes and more clothes...</h1>
+        <p class="lead">Here is a list of some current products we have:</p>
+		<div class="list-group">
+		  <a href="./clothes.php" class="list-group-item active">
+		    Clothes
+		  </a>
+		  <a href="./shoes.php" class="list-group-item">Shoes</a>
+		  <a href="./acc.php" class="list-group-item">Accesories</a>
+		</div>
       </div>
-
-	<?php include './inc/back-home.php' ?>
 
     </div><!-- /.container -->
 
@@ -47,9 +52,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
 		$(function(){
-			$(".about-menu").addClass("active");
+			$(".clothes-menu").addClass("active");
 		})
 	</script>
 </body></html>

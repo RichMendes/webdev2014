@@ -27,8 +27,8 @@
   </head>
 
   <?php 
-  	$project_name = 'Project One';
-  	include './inc/proj-body.php'; 
+  	$product_type = 'Accesories';
+  	include './inc/product-body.php'; 
   ?>
   
     <!-- Bootstrap core JavaScript
@@ -36,6 +36,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
-  
-
+    <script type="text/javascript">
+		$(function(){
+			$(".clothes-menu").addClass("active");
+		})
+	</script>
 </body></html>

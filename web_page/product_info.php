@@ -28,23 +28,11 @@
 
   <body style="">
 
-	<?php include './inc/nav-bar.php' ?>
-
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Project Home Page</h1>
-        <p class="lead">Here is a list of projects:</p>
-		<div class="list-group">
-		  <a href="./project_home.php" class="list-group-item active">
-		    Project Home
-		  </a>
-		  <a href="./project1.php" class="list-group-item">Project 1</a>
-		  <a href="./project2.php" class="list-group-item">Project 2</a>
-		</div>
-      </div>
-
-    </div><!-- /.container -->
+	<?php 
+		$product_type = 'Shoes';
+		$product_id = '123';
+		include './inc/product_info_body.php'; 
+    ?>
 
 
     <!-- Bootstrap core JavaScript
@@ -52,6 +40,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
-  
-
+    <script type="text/javascript">
+		$(function(){
+			$(".product-menu").addClass("active");
+		})
+	</script>
 </body></html>

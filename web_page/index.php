@@ -36,7 +36,7 @@
       <div class="starter-template">
         <h1>Basic Website Home Page</h1>
         <p class="lead">Here is some basic information. <br>
-        	Click any of these buttons to go to your destination.</p>
+        	This will display major news/updates and some products.</p>
       </div>
 
     </div><!-- /.container -->
@@ -47,6 +47,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
-  
-
+    <script type="text/javascript">
+		$(function(){
+			$(".index-menu").addClass("active");
+		})
+	</script>
 </body></html>

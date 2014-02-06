@@ -6,15 +6,15 @@
 
 		 	<div class="starter-template">
 		   		<h1>';
-	echo $project_name;
+	echo $product_type;
 	echo '</h1>
-		   <p class="lead">Here is some basic information. <br>
-		   	Click any of these buttons to go to your destination.</p>
+		   <p class="lead">Here are some of our current collections <br>
+		   	Click any of these to find out more.</p>
 		   	<div class="panel panel-default">
 			  <!-- Default panel contents -->
-			  <div class="panel-heading">Members</div>
+			  <div class="panel-heading">Products</div>
 			  <div class="panel-body">
-			    <p>Here are the members of this project.</p>
+			    <p>Here are the available options.</p>
 			  </div>
 
 			  <!-- Table -->

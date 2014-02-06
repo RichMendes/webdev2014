@@ -54,6 +54,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./Starter Template for Bootstrap_files/jquery-1.10.2.min.js"></script>
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
-  
-
+	<script type="text/javascript">
+			$(function(){
+				$(".contact-menu").addClass("active");
+			})
+	</script>
 </body></html>

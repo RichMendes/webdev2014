@@ -15,13 +15,13 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  
 		    //Examples of php arrayList
 		  	$exLinks = array('./contact.php', './index.php' , './about.php');
-			$links = array(
+			$variables = array(
 					array('class' => 'index-menu', 'link' => 'index.php', 'title' => 'Home'),
 					array('class' => 'about-menu', 'link' => 'about.php', 'title' => 'About Us'),
 					array('class' => 'contact-menu', 'link' => 'contact.php', 'title' => 'Contact Us')
 					);
 			/*	Different output of navbar using array	*/
-			foreach ($variable as $value) { ?>
+			foreach ($variables as $value) { ?>
 				<li class="<?=$value['class']?>" ><a href="<?=$value['link']?>"><?=$value['title']?></a></li>
 			<?}
 			
@@ -42,15 +42,16 @@ echo '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			else
 				echo  '<li><a href="./contact.php">Contact</a></li>';
 			*/
-			echo '<li class="dropdown">
-          			<a href="./project_home.php" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+			echo '<li class="dropdown clothes-menu">
+          			<a href="./clothes.php" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
 	          		<ul class="dropdown-menu">
-	          			<li><a href="./project_home.php">Project Home Page</a></li>
+	          			<li><a href="./clothes.php">Clothes</a></li>
 	          			<li class="divider"></li>
-	            		<li><a href="./project1.php">Project 1</a></li>
-	            		<li><a href="./project2.php">Project 2</a></li>
+	            		<li><a href="./shoes.php">Shoes</a></li>
+	            		<li><a href="./acc.php">Accesories</a></li>
 	          		</ul>
-            	  </li>';					
+            	  </li>';
+			echo '<li class="checkout-menu"><a href="./checkout.php">Checkout</a></li>';					
 			/* Old Project Tabs	
 			else
 				echo  '<li><a href="./project1.php">
