@@ -28,16 +28,19 @@
 
   <body style="">
 
-	<?php include './inc/nav-bar.php' ?>
+
+	<? include './inc/nav-bar.php'; ?>
 
     <div class="container">
 
       <div class="starter-template">
-        <h1>Here is the About page.</h1>
-        <p class="lead">This is a basic website using html/css/js/php. <br></p>
+        <h1>Ready to checkout?</h1>
+        <p class="lead">Well you came to the right place.<br>
+        	Unfortunately there is no need to have a way to pay for anyhting thing <br> 
+        	since there is nothing to buy yet!<br>
+        	I hope you will come back soon and actually have something to look at.</p>
       </div>
-
-	<?php include './inc/back-home.php' ?>
+      <?php include './inc/back-home.php'; ?>
 
     </div><!-- /.container -->
 
@@ -49,7 +52,7 @@
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
     <script type="text/javascript">
 		$(function(){
-			$(".about-menu").addClass("active");
+			$(".checkout-menu").addClass("active");
 		})
 	</script>
 </body></html>

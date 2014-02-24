@@ -26,22 +26,11 @@
     <![endif]-->
   </head>
 
-  <body style="">
-
-	<?php include './inc/nav-bar.php' ?>
-
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Here is the About page.</h1>
-        <p class="lead">This is a basic website using html/css/js/php. <br></p>
-      </div>
-
-	<?php include './inc/back-home.php' ?>
-
-    </div><!-- /.container -->
-
-
+  <?php 
+  	$product_type = 'Accesories';
+  	include './inc/product-body.php'; 
+  ?>
+  
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -49,7 +38,7 @@
     <script src="./Starter Template for Bootstrap_files/bootstrap.min.js"></script>
     <script type="text/javascript">
 		$(function(){
-			$(".about-menu").addClass("active");
+			$(".clothes-menu").addClass("active");
 		})
 	</script>
 </body></html>
