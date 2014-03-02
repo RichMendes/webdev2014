@@ -7,3 +7,20 @@
 		$conn = mysqli_connect("localhost", "n02004019", $password, "n02004019_db");
 		return $conn;
 	}
+	
+	function fetch_all($SQL) {
+		//	Get all records
+		$conn = GetConnection();
+		
+		$results = $conn->query($SQL);
+		
+		$arr = array();
+		
+		while ($row = $results->fetch_assoc()) {
+			$arr[] = $row;
+		}
+		
+		$conn->close();
+		
+		return $arr;
+	}

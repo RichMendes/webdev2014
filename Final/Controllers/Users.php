@@ -5,9 +5,17 @@
 	@$action = $_REQUEST['action'];
 
 	switch ($action) {
-		case 'index':
+		case 'create':
+			break;
+		case 'update':
+			break;
+		case 'delete':
 			break;
 		default:
+			echo ' ';
+			$model = Users::Get();
+			if($action == null) {
+				$action = 'index';
+			}
 			include __DIR__ . "/../Views/Users/$action.php";
-			break;
 	}
