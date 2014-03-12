@@ -6,8 +6,10 @@
 			static public function Get($id = null) {	//	If $id is given a value it will be set to that if nothing is given it will be set to null
 				if($id == null) {
 					//	Get all records
-					$e = fetch_all("SELECT * FROM 2014Spring_ContactMethods");
-					return fetch_all("SELECT * FROM 2014Spring_ContactMethods");
+					$sql = "SELECT U.*, K.Name as UserType_Name 
+					        FROM 2014Spring_Users U Join 2014Spring_Keywords K ON U.UserType = K.id
+					       ";
+					return fetch_all($sql);
 				}
 				else {
 					//	Get one record
@@ -15,7 +17,12 @@
 			}
 			
 			static public function Create($row) {
+				$conn = GetConnection();
+				$sql = "";
+				$results = $conn->query($sql);
+				$conn->close();
 				
+				return $arr;
 			}
 			
 			static public function Blank()
