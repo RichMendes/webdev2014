@@ -2,17 +2,23 @@
 	include_once __DIR__ . '/../inc/functions.php';
 	include_once __DIR__ . '/../inc/allModels.php';
 	
-	@$action = $_REQUEST['action'];
+	@$view = $action = $_REQUEST['action'];
+	@$format = $_REQUEST['format'];
 
-	switch ($action) {
-		case 'create':
+	switch ($action){
+		case 'new':
+			$view = 'edit';
 			break;
-		case 'update':
+		case 'edit':
+			break;
+		case 'save':
+			//	TODO: Validate
+			Products::Create($_REQUEST);
+			$view = 'edit';
 			break;
 		case 'delete':
 			break;
 		default:
-			echo ' ';
 			$model = Products::Get();
 			if($view == null) $view = 'index';
 	}

@@ -5,25 +5,39 @@
 	@$view = $action = $_REQUEST['action'];
 	@$format = $_REQUEST['format'];
 
-	switch ($action) {
-		case 'create':
+	switch ($action){
+		case 'new':
+			$view = 'edit';
 			break;
-		case 'update':
+		case 'edit':
+			$model = Users::Get($_REQUEST['id']);
+			$view = 'edit';
+			break;
+		case 'save':
+			//	TODO: Validate
+			if(!$errors = Users::Create($_REQUEST)){
+				header("Location: ?");
+				die();
+			}else {
+				print_r($errors);
+				$model = $$_REQUEST;
+				$view = 'edit';
+				
+			}
 			break;
 		case 'delete':
 			break;
 		default:
-			echo ' ';
 			$model = Users::Get();
 			if($view == null) $view = 'index';
 	}
-	
-	switch($format) {
+
+	switch ($format) {
 		case 'plain':
-			include __DIR__ . "/../Views/Users/$view.php";
+			include __DIR__ . "/../Views/Users/$view.php";			
 			break;
 		default:
-			$view = __DIR__ . "/../Views/Users/$view.php";
-			include __DIR__ . "/../Views/Shared/_Layout.php";;
+			$view = __DIR__ . "/../Views/Users/$view.php";	
+			include __DIR__ . "/../Views/Shared/_Layout.php";
 			break;
 	}
