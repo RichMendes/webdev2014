@@ -6,9 +6,10 @@
 			static public function Get($id = null) {	//	If $id is given a value it will be set to that if nothing is given it will be set to null
 				if($id == null) {
 					//	Get all records
-					$sql = "SELECT U.*, K.Name as UserType_Name 
-					        FROM 2014Spring_Users U Join 2014Spring_Keywords K ON U.UserType = K.id
-					       ";
+					//$sql = "SELECT U.*, K.Name as UserType_Name 
+					        //FROM 2014Spring_Users U Join 2014Spring_Keywords K ON U.UserType = K.id
+					       //";
+				    $sql = 'SELECT * FROM 2014Spring_Orders';
 					return fetch_all($sql);
 				}
 				else {

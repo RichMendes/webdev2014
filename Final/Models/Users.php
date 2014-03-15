@@ -13,16 +13,34 @@
 				}
 				else {
 					//	Get one record
+					$sql .= " WHERE U.id = $id ";
+					if($results = fetch_all($sql) && count($results) > 0){
+						return $results[0];
+					}else{
+						return null;
+					}
 				}
 			}
 			
 			static public function Create($row) {
 				$conn = GetConnection();
-				$sql = "INSERT INTO 2014Spring_Users (FirstName, LastName, Password, fbid, UserType) VALUES ('$row[FirstName]', '$row[LastName]', '$row[Password]', '$row[fbid]', '$row[UserType]')";
+				
+				if (isset($row['id'])) {
+					$sql = "Update 2014Spring_Users
+							set FirstName='$row[FirstName]', LastName='$row[LastName]', Password='$row[LastName]', 
+							fbid='$row[fbid]', UserType='$row[UserType]'
+							WHERE id = $row[id]";
+				}else {
+					$sql = "INSERT INTO 2014Spring_Users 
+						(FirstName, LastName, Password, fbid, UserType) 
+						VALUES ('$row[FirstName]', '$row[LastName]', '$row[Password]', '$row[fbid]', '$row[UserType]')";
+				}	
+						
 				$results = $conn->query($sql);
+				$error = $conn->error;
 				$conn->close();
 				
-				return $arr;
+				return $error ? array ('sql error' => $error) : false;
 			}
 			
 			static public function Blank()

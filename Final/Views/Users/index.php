@@ -14,6 +14,7 @@
 				<th>Password</th>
 				<th>fbid</th>
 				<th>UserType</th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +26,7 @@
 					<td><?=$row['Password']?></td>
 					<td><?=$row['fbid']?></td>
 					<td><?=$row['UserType_Name']?></td>
+					<td><a href="?action=edit&id=<?=$row['id']?>">Edit</a></td>
 				</tr>
 			<? endforeach; ?>
 			

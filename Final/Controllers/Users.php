@@ -10,11 +10,20 @@
 			$view = 'edit';
 			break;
 		case 'edit':
+			$model = Users::Get($_REQUEST['id']);
+			$view = 'edit';
 			break;
 		case 'save':
 			//	TODO: Validate
-			Users::Create($_REQUEST);
-			$view = 'edit';
+			if(!$errors = Users::Create($_REQUEST)){
+				header("Location: ?");
+				die();
+			}else {
+				print_r($errors);
+				$model = $$_REQUEST;
+				$view = 'edit';
+				
+			}
 			break;
 		case 'delete':
 			break;

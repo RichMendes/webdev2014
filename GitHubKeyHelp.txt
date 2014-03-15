@@ -1,0 +1,3 @@
+Download git and follow the instructions from the link below:
+
+https://help.github.com/articles/generating-ssh-keys
