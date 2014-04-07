@@ -25,23 +25,28 @@
 				}
 			}
 			
-			static public function Save($row) {
+			static public function Save(&$row) {
 				$conn = GetConnection();
 				
-				$row = escape_all($row, $conn); //you need to do this so you clean up input (prevents SQL injection)
+				$row2 = escape_all($row, $conn); //you need to do this so you clean up input (prevents SQL injection)
 				if (!empty($row['id'])) {
 					$sql = "Update 2014Spring_Users
-							set FirstName='$row[FirstName]', LastName='$row[LastName]', Password='$row[Password]', 
-							fbid='$row[fbid]', UserType='$row[UserType]'
-							WHERE id = $row[id]";
+							set FirstName='$row2[FirstName]', LastName='$row2[LastName]', Password='$row2[Password]', 
+							fbid='$row2[fbid]', UserType='$row2[UserType]'
+							WHERE id = $row2[id]";
 				}else {
 					$sql = "INSERT INTO 2014Spring_Users 
 						(FirstName, LastName, Password, fbid, UserType) 
-						VALUES ('$row[FirstName]', '$row[LastName]', '$row[Password]', '$row[fbid]', '$row[UserType]')";
+						VALUES ('$row2[FirstName]', '$row2[LastName]', '$row2[Password]', '$row2[fbid]', '$row2[UserType]')";
 				}	
 						
 				$results = $conn->query($sql);
 				$error = $conn->error;
+				
+				if(!$error && empty($row['id'])){
+					$row['id'] = $conn->insert_id;
+				}
+				
 				$conn->close();
 				
 				return $error ? array ('sql error' => $error) : false;
@@ -57,7 +62,16 @@
 			}
 			
 			static public function Delete($id) {
+				$conn = GetConnection();
 				
+				$sql = "DELETE FROM 2014Spring_Users WHERE id = $id";
+				
+				$results = $conn->query($sql);
+				$error = $conn->error;
+				
+				$conn->close();
+				
+				return $error ? array ('sql error' => $error) : false;
 			}
 			
 			static public function Validate($row) {

@@ -1,8 +1,30 @@
-
+	<?
+		$id = $_REQUEST['id'];
+	?>
 	<link rel="stylesheet" type="test/css" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css" />
 	<h2>
 		List of Users
 	</h2>
+	
+	<style type="text/css">
+		body table.table .highlighted td{
+			background-color: #FFFFAA;
+		}
+	</style>
+	
+	<? if(isset($_REQUEST['sub_action'])): ?>
+		<div class="alert alert-success alert-dismissable">
+			<a class="close">&times;</a>
+			The row has been <?=$_REQUEST['sub_action']?> successfully!
+		</div>
+	<? endif; ?>
+	
+	<? if(isset($sub_action_delete)): ?>
+		<div class="alert alert-danger alert-dismissable">
+			<a class="close">&times;</a>
+			The row <?=$deleted['FirstName']?> <?=$deleted['LastName']?> has been <?=$sub_action_delete?> successfully!
+		</div>
+	<? endif; ?>
 	
 	<a href="?action=new">Create New</a>
 	
@@ -20,7 +42,7 @@
 		<tbody>
 			
 			<? foreach ($model as $row): ?>
-				<tr>
+				<tr class="<?=$id==$row['id'] ? "highlighted" : "" ?>">
 					<td><?=$row['FirstName']?></td>
 					<td><?=$row['LastName']?></td>
 					<td><?=$row['Password']?></td>
@@ -30,7 +52,7 @@
 						<div class="btn-group">
 							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=edit&id=<?=$row['id']?>"></a>
 							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=edit&id=<?=$row['id']?>"></a>
+							<a class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=delete&id=<?=$row['id']?>"></a>
 						</div>
 					</td>
 				</tr>
@@ -41,9 +63,15 @@
 	
 	<? function Javascripts() { ?>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				$(".table").dataTable();
+				$(".close").click(function(){
+					$(this).closest(".alert").slideUp();
+				})
+				
+				$(".highlighted td").delay(2000).animate({backgroundColor: ""}, 2000)
 			})
 		</script>
 	<? } ?>

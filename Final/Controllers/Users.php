@@ -13,13 +13,13 @@
 			$model = Users::Get($_REQUEST['id']);
 			break;
 		case 'save':
-			//	TODO: Validate
+			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
 			$errors = Users::Validate($_REQUEST);
 			if(!$errors){
 				$errors = Users::Save($_REQUEST);
 			}
 			if(!$errors){
-				header("Location: ?");
+				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
 				die();
 			}else {
 				//print_r($errors);
@@ -29,6 +29,11 @@
 			}
 			break;
 		case 'delete':
+			$sub_action_delete = 'deleted';
+			$deleted = Users::Get($_REQUEST['id']);
+			$errors = Users::Delete($_REQUEST['id']);
+			$model = Users::Get();
+			$view = 'index';
 			break;
 		default:
 			$model = Users::Get();
