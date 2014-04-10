@@ -29,11 +29,19 @@
 			}
 			break;
 		case 'delete':
-			$sub_action_delete = 'deleted';
+			/*$sub_action_delete = 'deleted';
 			$deleted = Users::Get($_REQUEST['id']);
 			$errors = Users::Delete($_REQUEST['id']);
 			$model = Users::Get();
-			$view = 'index';
+			$view = 'index';*/
+			
+			//Plotkin's method:
+			if($_SERVER['REQUEST_METHOD'] == 'GET'){
+				//prompt
+				$model = Users::Get($_REQUEST['id']);
+			} else{
+				$errors = Users::Delete($_REQUEST['id']);
+			}
 			break;
 		default:
 			$model = Users::Get();
@@ -41,6 +49,10 @@
 	}
 
 	switch ($format) {
+		case 'json':
+			$ret = array('success'=> empty($errors), 'errors'=> $errors, 'data'=> $model);
+			echo json_encode($ret);
+			break;
 		case 'plain':
 			include __DIR__ . "/../Views/Users/$view.php";			
 			break;
