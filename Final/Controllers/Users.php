@@ -12,6 +12,10 @@
 		case 'edit':
 			$model = Users::Get($_REQUEST['id']);
 			break;
+		case 'details':
+			$model = Users::Get($_REQUEST['id']);
+			$view = 'details';
+			break;
 		case 'save':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
 			$errors = Users::Validate($_REQUEST);
@@ -22,10 +26,8 @@
 				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
 				die();
 			}else {
-				//print_r($errors);
 				$model = $_REQUEST;
 				$view = 'edit';
-				
 			}
 			break;
 		case 'delete':

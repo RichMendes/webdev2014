@@ -19,13 +19,6 @@
 		</div>
 	<? endif; ?>
 	
-	<? if(isset($sub_action_delete)): ?>
-		<div class="alert alert-danger alert-dismissable">
-			<a class="close">&times;</a>
-			The row <?=$deleted['FirstName']?> <?=$deleted['LastName']?> has been <?=$sub_action_delete?> successfully!
-		</div>
-	<? endif; ?>
-	
 	<a href="?action=new" class="cmd-new">Create New</a>
 	
 	<table class="table table-striped table-bordered table-hover">
@@ -118,7 +111,7 @@
 					event.preventDefault();
 					
 					$.get(that.href, { format: 'plain'}, function(data){
-						var $myModal = $("#myModal")
+						var $myModal = $("#myModal");
 						$(".modal-content", $myModal).html(data);
 						$myModal.modal('show');
 						

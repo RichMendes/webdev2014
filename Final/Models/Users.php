@@ -36,8 +36,8 @@
 							WHERE id = $row2[id]";
 				}else {
 					$sql = "INSERT INTO 2014Spring_Users 
-						(FirstName, LastName, Password, fbid, UserType) 
-						VALUES ('$row2[FirstName]', '$row2[LastName]', '$row2[Password]', '$row2[fbid]', '$row2[UserType]')";
+						(created_at, FirstName, LastName, Password, fbid, UserType) 
+						VALUES (current_timestamp, '$row2[FirstName]', '$row2[LastName]', '$row2[Password]', '$row2[fbid]', '$row2[UserType]')";
 				}	
 						
 				$results = $conn->query($sql);
