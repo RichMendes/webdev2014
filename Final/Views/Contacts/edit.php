@@ -52,7 +52,7 @@
 		<select size="1" class="required form-control" name="ContactMethodType" id="ContactMethodType">
 			<option value="">--Contact Method Type--</option>
 			<? foreach (Keywords::SelectListFor(11) as $row): ?>
-				<option value="<?=$row['id']?>">
+				<option value="<?=$row['id']?>" <?if($model['ContactMethodType']==$row['id']) echo 'selected=true'?>>
 					<?=$row['Name']?>
 				</option>
 			<? endforeach; ?>
@@ -97,7 +97,7 @@
 			$(function(){
 				
 				$("form").validate();
-				$("#UserType").val(<?=$model['UserType']?>); //or put select in 
+				$("#ContactMethodType").val(<?=$model['ContactMethodType']?>); //or put select in 
 			})
 		</script>
 			

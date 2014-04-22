@@ -97,7 +97,7 @@
 		<select size="1" class="required form-control" name="AddressType" id="AddressType">
 			<option value="">--Address Type--</option>
 			<? foreach (Keywords::SelectListFor(12) as $row): ?>
-				<option value="<?=$row['id']?>">
+				<option value="<?=$row['id']?>" <?if($model['AddressType']==$row['id']) echo 'selected=true'?>>
 					<?=$row['Name']?>
 				</option>
 			<? endforeach; ?>
@@ -133,7 +133,7 @@
 			$(function(){
 				
 				$("form").validate();
-				$("#UserType").val(<?=$model['UserType']?>); //or put select in 
+				$("#AddressType").val(<?=$model['AddressType']?>); //or put select in 
 			})
 		</script>
 			

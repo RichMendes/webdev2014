@@ -87,13 +87,12 @@
 			//Addresses, City, State, Zip, AddressType, Users_id, Country
 			static public function Validate($row) {
 				$errors = array();
-				if(!is_numeric($row['ContactMethodType'])) $errors['ContactMethodType'] = "must be a number";
-				if(empty($row['AddressType'])) $errors['AddressType'] = "is required";
+				if(empty($row['ContactMethodType'])) $errors['ContactMethodType'] = "is required";
 				
 				if(empty($row['Value'])) $errors['Value'] = "is required";
 				
 				if(!is_numeric($row['User_id'])) $errors['User_id'] = "must be a number";
-				if(empty($row['Users_id'])) $errors['Users_id'] = "is required";
+				if(empty($row['User_id'])) $errors['User_id'] = "is required";
 
 				return count($errors) > 0 ? $errors : false;			
 			}

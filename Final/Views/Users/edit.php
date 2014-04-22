@@ -80,7 +80,7 @@
 		<select size="1" class="required form-control" name="UserType" id="UserType">
 			<option value="">--User Type--</option>
 			<? foreach (Keywords::SelectListFor(10) as $row): ?>
-				<option value="<?=$row['id']?>">
+				<option value="<?=$row['id']?>" <?if($model['UserType']==$row['id']) echo 'selected=true'?>>
 					<?=$row['Name']?>
 				</option>
 			<? endforeach; ?>
