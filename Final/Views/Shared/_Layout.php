@@ -40,8 +40,8 @@
 				$links['Users'] = array('class' => 'users-menu', 'link' => 'Users.php', 'name' => 'Users');
 				$links['Addresses'] = array('class' => 'addresses-menu', 'link' => 'Addresses.php', 'name' => 'Addresses');
 				$links['Contacts'] = array('class' => 'contacts-menu', 'link' => 'Contacts.php', 'name' => 'Contacts');
-				$links['Items'] = array('class' => 'items-menu', 'link' => 'Items.php', 'name' => 'Items');
 				$links['Orders'] = array('class' => 'orders-menu', 'link' => 'Orders.php', 'name' => 'Orders');
+				$links['Items'] = array('class' => 'items-menu', 'link' => 'Items.php', 'name' => 'Order Items');
 				$links['Products'] = array('class' => 'products-menu', 'link' => 'Products.php', 'name' => 'Products');
 				$links['Supliers'] = array('class' => 'supliers-menu', 'link' => 'Supliers.php', 'name' => 'Supliers');
 				 

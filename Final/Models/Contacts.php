@@ -84,9 +84,9 @@
 			}
 			
 			
-			//Addresses, City, State, Zip, AddressType, Users_id, Country
 			static public function Validate($row) {
 				$errors = array();
+				if(empty($row['ContactMethodType'])) $errors['ContactMethodType'] = "is required";
 				if(empty($row['ContactMethodType'])) $errors['ContactMethodType'] = "is required";
 				
 				if(empty($row['Value'])) $errors['Value'] = "is required";

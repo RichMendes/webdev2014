@@ -34,7 +34,6 @@
 		<a href="?" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 		<h4 class="modal-title">Edit Address of: <?=$model['FirstName']?> <?=$model['LastName']?></h4>
 	</div>
-
 	<ul class="error">
 		<? foreach ($errors as $key => $value): ?>
 			<li><b><?=$key?>:</b> <?=$value?></li>

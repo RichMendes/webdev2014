@@ -1,7 +1,7 @@
 <?php
 		include_once __DIR__ . '/../inc/functions.php';		//propper absolute path
 		
-		class Contacts {
+		class Items {
 			//	CRUD (Create, Read/Get, Update, Delete)
 			static public function Get($id = null) {	//	If $id is given a value it will be set to that if nothing is given it will be set to null
 				$sql = "SELECT I.*, OT.FirstName, OT.LastName, OT.Addresses, PT.Name as ProductName
@@ -48,14 +48,14 @@
 				
 				$row2 = escape_all($row, $conn); //you need to do this so you clean up input (prevents SQL injection)
 				if (!empty($row['id'])) {
-					$sql = "Update 2014Spring_ContactMethods
-							set ContactMethodType='$row2[ContactMethodType]', Value='$row2[Value]', User_id='$row2[User_id]' 
+					$sql = "Update 2014Spring_Order_Items
+							set Order_id='$row2[Order_id]', Product_id='$row2[Product_id]' 
 							WHERE id = $row2[id]";
 				}else {
-					$sql = "INSERT INTO 2014Spring_ContactMethods 
-						(created_at, ContactMethodType, Value, User_id) 
-						VALUES (current_timestamp, '$row2[ContactMethodType]', 
-								'$row2[Value]', '$row2[User_id]')";
+					$sql = "INSERT INTO 2014Spring_Order_Items 
+						(created_at, Order_id, Product_id) 
+						VALUES (current_timestamp, '$row2[Order_id]', 
+								'$row2[Product_od]')";
 				}	
 						
 				$results = $conn->query($sql);
@@ -82,7 +82,7 @@
 			static public function Delete($id) {
 				$conn = GetConnection();
 				
-				$sql = "DELETE FROM 2014Spring_ContactMethods WHERE id = $id";
+				$sql = "DELETE FROM 2014Spring_Order_Items WHERE id = $id";
 				
 				$results = $conn->query($sql);
 				$error = $conn->error;
@@ -93,16 +93,14 @@
 			}
 			
 			
-			//Addresses, City, State, Zip, AddressType, Users_id, Country
+			
 			static public function Validate($row) {
 				$errors = array();
-				if(!is_numeric($row['ContactMethodType'])) $errors['ContactMethodType'] = "must be a number";
-				if(empty($row['AddressType'])) $errors['AddressType'] = "is required";
+				if(!is_numeric($row['Order_id'])) $errors['Order_id'] = "must be a number";
+				if(empty($row['Order_id'])) $errors['Order_id'] = "is required";
 				
-				if(empty($row['Value'])) $errors['Value'] = "is required";
-				
-				if(!is_numeric($row['User_id'])) $errors['User_id'] = "must be a number";
-				if(empty($row['Users_id'])) $errors['Users_id'] = "is required";
+				if(!is_numeric($row['Product_id'])) $errors['Product_id'] = "must be a number";
+				if(empty($row['Product_id'])) $errors['Product_id'] = "is required";
 
 				return count($errors) > 0 ? $errors : false;			
 			}
