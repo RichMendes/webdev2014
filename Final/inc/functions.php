@@ -14,6 +14,9 @@
 		
 		$results = $conn->query($SQL);
 		
+		$error = $conn->error;
+		if($error) return $error;
+		
 		$arr = array();
 		
 		while ($row = $results->fetch_assoc()) {

@@ -37,6 +37,11 @@
 	.label-danger{ 
 		background-color: maroon; 
 	}
+	
+	.carousel-simple {
+		width: 600px;
+		height: 250px;
+	}
 </style>
 
 	<ul class="nav nav-pills categories" data-bind="foreach: categoryList">
@@ -44,6 +49,49 @@
 	  	<a href="#" data-bind="text: Name, click: $root.selectCategory"></a>
 	  </li>
 	</ul>	
+	
+	<!--Rich implemenation-->
+	<div id="carousel-example-generic" class="carousel slide carousel-simple" data-ride="carousel">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	  </ol>
+	  
+	  <!-- Wrapper for slides -->
+	  <div class="carousel-inner">
+	    <div class="item active">
+	      <img src="../Views/Products/pics/art.jpg">
+	      <div class="carousel-caption">
+	      	Some caption
+	      </div>
+	    </div>
+	    
+	    <div class="item">
+	      <img src="../Views/Products/pics/food.jpg">
+	      <div class="carousel-caption">
+	      	Some caption
+	      </div>
+	    </div>
+	    
+	    <div class="item">
+	      <img src="../Views/Products/pics/industrial.jpg">
+	      <div class="carousel-caption">
+	      	Some caption
+	      </div>
+	    </div>
+	  </div>
+	
+	  <!-- Controls -->
+	  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left"></span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right"></span>
+	  </a>
+	</div>
+	<!--Rich implemenation-->
 
 	<div class="row" data-bind="foreach: itemList">
 		<div class=" col-md-4">

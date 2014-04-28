@@ -6,6 +6,7 @@
 	@$format = $_REQUEST['format'];
 	@$id = $_REQUEST['id'];
 	@$category_id = $_REQUEST['category_id'];
+	$layout = '_Layout';
  
 	switch ($action){
 		case 'new':
@@ -53,7 +54,11 @@
 		case 'categories':
 			$model = Products::GetCategories();
 			break;
+		case 'test':
+			$layout = '_PublicLayout';
+			$view = 'home2';
 		default:
+			$layout = '_PublicLayout';
 			if($view == null) $view = 'home';
 	}
 
@@ -67,6 +72,6 @@
 			break;
 		default:
 			$view = __DIR__ . "/../Views/Products/$view.php";	
-			include __DIR__ . "/../Views/Shared/_Layout.php";
+			include __DIR__ . "/../Views/Shared/$layout.php";
 			break;
 	}
