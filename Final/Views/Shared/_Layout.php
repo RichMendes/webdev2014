@@ -15,6 +15,9 @@
     	body {
 		  padding-top: 50px;
 		}
+		.navbar-logout {
+			margin-top: 8px;
+		}
     </style>
   </head>
 
@@ -52,6 +55,27 @@
 				<?}
           	?>
           </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+	        <li>
+	        	<form method='post' action="Products.php?action=logout" class="form-inline">
+					<button type="submit" class="btn btn-default navbar-logout">
+				  		Log Out <span class="glyphicon glyphicon-log-out"></span></>
+					</button>
+				</form>
+			</li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">My Account</a></li>
+	            <li><a href="#">My Orders</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Admin Options</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+          
         </div><!--/.nav-collapse -->
       </div>
     </div>

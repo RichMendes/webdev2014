@@ -39,6 +39,13 @@
 	}
 </style>
 
+	<? if(isset($_REQUEST['sub_action'])): ?>
+		<div class="alert alert-success alert-dismissable">
+			<a class="close">&times;</a>
+			The row has been <?=$_REQUEST['sub_action']?> successfully!
+		</div>
+	<? endif; ?>
+
 	<ul class="nav nav-pills categories" data-bind="foreach: categoryList">
 	  <li data-bind="css: { active: $data == $root.currentCategory() }" >
 	  	<a href="#" data-bind="text: Name, click: $root.selectCategory"></a>
@@ -89,7 +96,7 @@
 				<span class="badge label-danger" data-bind="text: cart().length">0</span>
 				</button>			
 		</li>
-		<li><a></a></li>
+		<li><a></a></li>  <!--fixes navbar spacing -->
 	</ul>
 </script>
 
@@ -99,6 +106,10 @@
 		<script type="text/javascript">
 			$(function(){
 				$(".navbar-collapse").append($("#cart-tmpl").html())
+				
+				$(".close").click(function(){
+					$(this).closest(".alert").slideUp();
+				})
 				
 				var vm = {
 					categoryList: ko.observableArray(),

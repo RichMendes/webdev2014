@@ -40,9 +40,7 @@
 			<li><b><?=$key?>:</b> <?=$value?></li>
 		<? endforeach; ?>
 	</ul>
-	
 <form action="?action=save" method="post" class="my-horizontal">
-	
 	
 	<input type="hidden" name="id" value="<?=$model['id']?>" />
 	

@@ -29,7 +29,7 @@
 	}
 </style>
 	      <div class="modal-header">
-	        <a href="?" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+	        <a href="Products.php" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 	        <h4 class="modal-title">Login</h4>
 	      </div>
 
@@ -61,6 +61,6 @@
 		  <div class="modal-footer">
 			<label class="control-label"></label>
 			<input class="btn btn-primary" type="submit" value="Login" />
-			<a href="?" data-dismiss="modal">Cancel</a>
+			<a href="Products.php" data-dismiss="modal">Cancel</a>
 	      </div>
     </form>

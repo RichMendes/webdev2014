@@ -12,6 +12,9 @@
 
     <!-- Custom styles for this template -->
     <style type="text/css">
+	    .navbar-logout {
+				margin-top: 8px;
+			}
     </style>
   </head>
 
@@ -42,13 +45,13 @@
 		          		$shortcut = "../../Final/Controllers/";
 		          	
 		          		$links = array();
-						$links['Users'] = array('class' => 'users-menu', 'link' => 'Users.php', 'name' => 'Users');
+						/*$links['Users'] = array('class' => 'users-menu', 'link' => 'Users.php', 'name' => 'Users');
 						$links['Addresses'] = array('class' => 'addresses-menu', 'link' => 'Addresses.php', 'name' => 'Addresses');
 						$links['Contacts'] = array('class' => 'contacts-menu', 'link' => 'Contacts.php', 'name' => 'Contacts');
 						$links['Orders'] = array('class' => 'orders-menu', 'link' => 'Orders.php', 'name' => 'Orders');
-						$links['Items'] = array('class' => 'items-menu', 'link' => 'Items.php', 'name' => 'Order Items');
+						$links['Items'] = array('class' => 'items-menu', 'link' => 'Items.php', 'name' => 'Order Items');*/
 						$links['Products'] = array('class' => 'products-menu', 'link' => 'Products.php', 'name' => 'Products');
-						$links['Supliers'] = array('class' => 'supliers-menu', 'link' => 'Supliers.php', 'name' => 'Supliers');
+						//$links['Supliers'] = array('class' => 'supliers-menu', 'link' => 'Supliers.php', 'name' => 'Supliers');
 						 
 						foreach ($links as $key => $value) {
 							$url = $shortcut . $value['link'];
@@ -57,9 +60,64 @@
 						<?}
 		          	?>
 		          </ul>
+		          
+		          <ul class="nav navbar-nav navbar-right">
+		          	<? if(!Accounts::IsLoggedIn()):?>	
+			        <li>
+			        	<form method='post' action="Products.php?action=login" class="form-inline">
+							<button type="submit" class="btn btn-default navbar-logout">
+								<span class="glyphicon glyphicon-log-in"></span>
+						  		Log In 
+							</button>
+						</form>
+					</li>
+					<?else:?>
+					<li>
+						<form method='post' action="Products.php?action=logout" class="form-inline">
+							<button type="submit" class="btn btn-default navbar-logout">
+						  		Log Out <span class="glyphicon glyphicon-log-out"></span></>
+							</button>
+						</form>
+					</li>
+					<? endif;?>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, <?= isset($user) ? $user['FirstName'] : ' Guest'?> <b class="caret"></b></a>
+			          <ul class="dropdown-menu">
+			          	<?if(Accounts::IsLoggedIn()):?>
+				            <li><a class="edit-info" href="<?= isset($user) ? "Products.php?action=accountInfo&id=" . $user['id'] : '#'?>">My Account</a></li>
+				            <li><a class="edit-order" href="<?= isset($user) ? "Products.php?action=orderInfo&id=" . $user['id'] : '#'?>">My Orders</a></li>
+				            <?if(isset($userAdmin)):?>
+					            <li class="divider"></li>
+					            <li><a href="#">Admin Options</a></li>
+					        <?endif;?>
+			            <?else:?>
+			            	<li><a href="Products.php?action=login">Please log in to see account details</a></li>
+			            <?endif;?>
+			          </ul>
+			        </li>
+			      </ul>
+		          <ul class="nav navbar-nav navbar-right"></ul> <!--fixes navbar spacing -->
         		</div><!--/.nav-collapse -->
       		</div>
       </div>
+      
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>One fine body&hellip;</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
     <div class="container">
     	
@@ -81,26 +139,25 @@
     <script type="text/javascript">
 		$(function(){
 			var currentPage = getFileName();
-			if (currentPage == "Users.php")
-				$(".users-menu").addClass("active");
-				
-			if (currentPage == "Addresses.php")
-				$(".addresses-menu").addClass("active");
-				
-			if (currentPage == "Contacts.php")
-				$(".contacts-menu").addClass("active");
-				
-			if (currentPage == "Items.php")
-				$(".items-menu").addClass("active");
-				
-			if (currentPage == "Orders.php")
-				$(".orders-menu").addClass("active");
 				
 			if (currentPage == "Products.php")
 				$(".products-menu").addClass("active");
 				
-			if (currentPage == "Supliers.php")
-				$(".supliers-menu").addClass("active");
+			//if (currentPage == "Supliers.php")
+				//$(".supliers-menu").addClass("active");
+				
+			$(".edit-info").click(function(event){
+					var that = this;
+					event.preventDefault();
+					
+					$.get(that.href, { format: 'plain'}, function(data){
+						var $myModal = $("#myModal");
+						$(".modal-content", $myModal).html(data);
+						$myModal.modal('show');
+						
+					})
+				})
+				
 		})
 		function getFileName() {
 			//this gets the full url

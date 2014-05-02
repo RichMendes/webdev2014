@@ -37,11 +37,17 @@
 	.label-danger{ 
 		background-color: maroon; 
 	}
-	
+	/*
 	.carousel-simple {
 		width: 600px;
 		height: 250px;
 	}
+	
+	.carousel-inner .item img{
+		height: 100%;
+		width: 100%;
+	} /* 
+	
 </style>
 
 	<ul class="nav nav-pills categories" data-bind="foreach: categoryList">
@@ -51,7 +57,7 @@
 	</ul>	
 	
 	<!--Rich implemenation-->
-	<div id="carousel-example-generic" class="carousel slide carousel-simple" data-ride="carousel">
+	<div id="carousel-example-generic" class="carousel slide carousel-simple" data-ride="carousel" style="width: 400px; margin: 0 auto">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
 	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -61,6 +67,7 @@
 	  
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner">
+	  	
 	    <div class="item active">
 	      <img src="../Views/Products/pics/art.jpg">
 	      <div class="carousel-caption">

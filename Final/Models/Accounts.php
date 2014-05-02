@@ -5,9 +5,10 @@ session_start();
 
 class Accounts {
 	public static function DoLogin($email, $password) {
-		$sql ="	SELECT *
-				From 2014Spring_Users U Join 2014Spring_ContactMethods CM on U.id=CM.User_Id
-				WHERE CM.Value = '$email'";
+		$sql ="	SELECT U.*,  CM.ContactMethodType, CM.Value
+					FROM 2014Spring_Users U Join 
+						2014Spring_ContactMethods CM on U.id=CM.User_Id
+				where CM.Value = '$email'";
 		$model = fetch_all($sql);
 
 		if(!empty($model) && $model[0]['Password'] == $password)
@@ -36,8 +37,8 @@ class Accounts {
 	}	
 	
 	public static function IsAdmin() {
-		$user = self::GetCurrenUser();
-		if(!user) return false;
+		$user = self::GetCurrentUser();
+		if(!$user) return false;
 		
 		return ($user['UserType'] == 14);
 	}

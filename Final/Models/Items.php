@@ -55,7 +55,7 @@
 					$sql = "INSERT INTO 2014Spring_Order_Items 
 						(created_at, Order_id, Product_id) 
 						VALUES (current_timestamp, '$row2[Order_id]', 
-								'$row2[Product_od]')";
+								'$row2[Product_id]')";
 				}	
 						
 				$results = $conn->query($sql);

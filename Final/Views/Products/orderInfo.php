@@ -1,9 +1,10 @@
-	<?
+<?
 		$id = $_REQUEST['id'];
 	?>
 	<link rel="stylesheet" type="test/css" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css" />
+	
 	<h2>
-		List of Users
+		List of Orders
 	</h2>
 	
 	<style type="text/css">
@@ -19,16 +20,13 @@
 		</div>
 	<? endif; ?>
 	
-	<a href="?action=new" class="cmd-new">Create New</a>
-	
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>FirstName</th>
-				<th>LastName</th>
-				<th>Password</th>
-				<th>fbid</th>
-				<th>UserType</th>
+				<th>Order Id</th>
+				<th>Order Date</th>
+				<th>Customer's Name</th>
+				<th>Address</th>
 				<th>Edit</th>
 			</tr>
 		</thead>
@@ -36,16 +34,14 @@
 			
 			<? foreach ($model as $row): ?>
 				<tr class="<?=$id==$row['id'] ? "highlighted" : "" ?>">
-					<td><?=$row['FirstName']?></td>
-					<td><?=$row['LastName']?></td>
-					<td><?=$row['Password']?></td>
-					<td><?=$row['fbid']?></td>
-					<td><?=$row['UserType_Name']?></td>
+					<td><?=$row['id']?></td>
+					<td><?=$row['created_at']?></td>
+					<td><?=$row['LastName']?>, <?=$row['FirstName']?></td>
+					<td><?=$row['Addresses']?></td>
 					<td>
-						<div class="btn-group">
-							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a <?= Accounts::IsAdmin() ? '' : 'disabled' ?>class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=delete&format=json&id=<?=$row['id']?>"></a>
+						<div class="btn-grou[]">
+							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=editOrder&id=<?=$row['User_id']?>&oid=<?=$row['id']?>"></a>
+							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=orderItems&id=<?=$row['id']?>"></a>
 						</div>
 					</td>
 				</tr>
@@ -89,7 +85,7 @@
 					event.preventDefault();
 					$.get(this.href, function(data){
 						
-						if(confirm("Are you sure that you want to delete " + data.data.FirstName + " " + data.data.LastName + "?")){
+						if(confirm("Are you sure that you want to delete " + data.data.FirstName + " " + data.data.LastName + "'s Order?")){
 							$.post(that.href, function(data){
 								if(data.success){
 									//msg user success

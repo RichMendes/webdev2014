@@ -95,13 +95,13 @@
 				if(empty($row['State'])) $errors['State'] = "is required";
 				if(empty($row['Zip'])) $errors['Zip'] = "is required";
 				
+				if(empty($row['Country'])) $errors['Country'] = "is required";
+				
 				if(!is_numeric($row['AddressType'])) $errors['AddressType'] = "must be a number";
 				if(empty($row['AddressType'])) $errors['AddressType'] = "is required";
 				
 				if(!is_numeric($row['Users_id'])) $errors['Users_id'] = "must be a number";
 				if(empty($row['Users_id'])) $errors['Users_id'] = "is required";
-				
-				if(empty($row['Country'])) $errors['Country'] = "is required";
 
 				return count($errors) > 0 ? $errors : false;			
 			}
