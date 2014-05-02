@@ -29,8 +29,7 @@ class Accounts {
 	}
 	
 	public static function RequireLogin(){
-		if(!self::IsLoggedIn())
-		{
+		if(!self::IsLoggedIn()) {
 			header("Location: Accounts.php?returnUrl=$_SERVER[PHP_SELF]");
 			die();
 		}
@@ -44,6 +43,10 @@ class Accounts {
 	}
 	
 	public static function RequireAdmin() {
-		
+		if(!self::IsAdmin()) { 
+			header("Location: Accounts.php?action=notAdmin");
+			die();
+		}
+		return true;
 	}
 }

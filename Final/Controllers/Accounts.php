@@ -6,8 +6,12 @@
 
 	@$view 		= $action = $_REQUEST['action'];
 	@$format 	= $_REQUEST['format'];
-
+	
 	switch ($action){
+		case 'notAdmin':
+			$view = 'notAdmin';
+			$user = Accounts::GetCurrentUser();
+			break;
 		default:	// Login
 		$view = 'login';
 		$errors = array();
