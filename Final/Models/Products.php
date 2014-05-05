@@ -99,30 +99,13 @@
 			
 			//	ACCOUTNTS
 			static public function GetAccountInfo($id = null){
-				$sql = "SELECT U.id, U.FirstName, U.LastName, U.Password, U.fbid, KU.Name as UserType, 
-							AA.Addresses, AA.City, AA.State, AA.Zip, AA.Country, AA.Name as AddressType, AA.id as AddressId,
-							CC.Value, CC.Name as ContactMethodType
-									FROM 2014Spring_Users U
-										INNER JOIN (
-											SELECT K.Name, K.id
-												FROM 2014Spring_Keywords K) as KU
-										ON U.UserType = KU.id
-										INNER JOIN (
-											SELECT A.id, A.Addresses, A.City, A.State, A.Zip, A.Country, A.Users_id, A.AddressType, KA.Name
-												FROM 2014Spring_Addresses A
-													INNER JOIN(
-														SELECT K.Name, K.id
-															FROM 2014Spring_Keywords K) as KA 
-													ON A.AddressType= KA.id) as AA
-										ON U.id = AA.Users_id
-										INNER JOIN (
-											SELECT C.ContactMethodType, C.Value, C.User_id, KC.Name
-												FROM 2014Spring_ContactMethods C
-													INNER JOIN(
-														SELECT K.Name, K.id
-															FROM 2014Spring_Keywords K) as KC 
-													ON C.ContactMethodType= KC.id) as CC
-										ON U.id = CC.User_id
+				$sql = "SELECT U.id, U.FirstName, U.LastName, U.Password, U.fbid, K.Name AS UserType, A.Addresses, A.City, A.State, A.Zip, A.Country, KA.Name AS AddressType, A.id AS AddressId, C.Value, KC.Name AS ContactMethodType
+						FROM 2014Spring_Users U
+							JOIN 2014Spring_Keywords K ON U.UserType = K.id
+							LEFT JOIN 2014Spring_Addresses A ON U.id = A.Users_id
+							LEFT JOIN 2014Spring_Keywords KA ON A.AddressType = KA.id
+							LEFT JOIN 2014Spring_ContactMethods C ON U.id = C.User_id
+							LEFT JOIN 2014Spring_Keywords KC ON C.ContactMethodType = KC.id
 						WHERE U.id = $id ";
 				$results = fetch_all($sql);
 				return $results[0];
