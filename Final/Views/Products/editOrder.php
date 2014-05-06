@@ -31,7 +31,7 @@
 
 	<div class="modal-header">
 		<a href="?" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-		<h4 class="modal-title">Edit <?=$model['FirstName']?> <?=$model['LastName']?>'s Order Address.</h4>
+		<h4 class="modal-title">Edit <?=$model['FirstName']?> <?=$model['LastName']?>'s Order.</h4>
 	</div>
 
 

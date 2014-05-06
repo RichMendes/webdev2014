@@ -35,6 +35,13 @@
 				}
 			}
 			
+			static public function GetUsers($id = null){
+				$sql = "SELECT U.id, U.FirstName, U.LastName
+							FROM 2014Spring_Users as U ";
+				$results = fetch_all($sql);
+				return $results;
+			}
+			
 			static public function Save(&$row) {
 				$conn = GetConnection();
 				

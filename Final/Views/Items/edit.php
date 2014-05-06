@@ -10,6 +10,7 @@
 	}
 	.my-horizontal .form-control{
 		display: inline-block;
+		width: 35%;
 	}
 
 	.has-feedback .form-control-feedback {
@@ -24,7 +25,7 @@
 
 	@media screen and (min-width: 768px) {
 		.my-horizontal .form-control{
-			width: 25%;
+			width: 35%;
 		}
 	}
 </style>
@@ -48,7 +49,16 @@
 	
 	<div class="form-group <?if(isset($errors['Order_id'])) echo 'has-error has-feedback' ?> ">
 		<label class="control-label" for="Order_id">Order Id:</label>
-		<input class="required form-control" type="text" name="Order_id" id="Order_id" value="<?=$model['Order_id']?>" placeholder="Order_id" />
+		
+		<select size="1" class="required form-control" name="Order_id" id="Order_id">
+			<option value="">--Order Id--</option>
+			<? foreach (Items::GetOrders() as $row): ?>
+				<option value="<?=$row['id']?>" <?if($model['Order_id']==$row['id']) echo 'selected=true'?>>
+					<?=$row['id']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
 		<? if(isset($errors['Order_id'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span ><?=$errors['Order_id']?></span>
@@ -56,8 +66,17 @@
 	</div>
 	
 	<div class="form-group <?if(isset($errors['Product_id'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="Product_id">Product Id:</label>
-		<input class="required form-control" type="text" name="Product_id" id="Product_id" value="<?=$model['Product_id']?>" placeholder="Product_id" />
+		<label class="control-label" for="Product_id">Product:</label>
+		
+		<select size="1" class="required form-control" name="Product_id" id="Product_id">
+			<option value="">--Product--</option>
+			<? foreach (Items::GetProducts() as $row): ?>
+				<option value="<?=$row['id']?>" <?if($model['Product_id']==$row['id']) echo 'selected=true'?>>
+					<?=$row['Name']?>: $<?=$row['Price']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
 		<? if(isset($errors['Product_id'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span ><?=$errors['Product_id']?></span>

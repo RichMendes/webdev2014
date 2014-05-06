@@ -88,7 +88,7 @@
 				            <li><a class="edit-order" href="<?= isset($user) ? "Products.php?action=orderInfo&id=" . $user['id'] : '#'?>">My Orders</a></li>
 				            <?if(isset($userAdmin)):?>
 					            <li class="divider"></li>
-					            <li><a href="#">Admin Options</a></li>
+					            <li><a href="Users.php">Back End</a></li>
 					        <?endif;?>
 			            <?else:?>
 			            	<li><a href="Products.php?action=login">Please log in to see account details</a></li>

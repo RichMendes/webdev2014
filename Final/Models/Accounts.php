@@ -47,6 +47,7 @@ class Accounts {
 			header("Location: Accounts.php?action=notAdmin");
 			die();
 		}
-		return true;
+		$user = self::GetCurrentUser();
+		return $user;
 	}
 }

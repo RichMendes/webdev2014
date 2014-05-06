@@ -72,13 +72,19 @@
 		<input class="form-control" type="text" name="fbid" id="fbid" value="<?=$model['fbid']?>" placeholder="fbid" />
 	</div>
 
+
 	<div class="form-group <?if(isset($errors['UserType'])) echo 'has-error has-feedback' ?> ">
 		<label class="control-label" for="UserType">User Type:</label>
 		
 		<select size="1" class="required form-control" name="UserType" id="UserType">
+			<?if(!Accounts::IsAdmin()):?>
+				<? foreach (Keywords::SelectListFor(10) as $row) {
+					if($model['UserType']==$row['Name'])
+						$userTypeId = $row['id']; } ?>
+			<?endif;?>
 			<option value="">--User Type--</option>
 			<? foreach (Keywords::SelectListFor(10) as $row): ?>
-				<option value="<?=$row['id']?>" <?if($model['UserType']==$row['Name']) echo 'selected=true'?>>
+				<option value="<?if(isset($userTypeId)) {echo $userTypeId;} else {echo $row['id'];}?>" <?if($model['UserType']==$row['Name']) echo 'selected=true'?>>
 					<?=$row['Name']?>
 				</option>
 			<? endforeach; ?>
@@ -89,6 +95,7 @@
 			<span ><?=$errors['UserType']?></span>
 		<? endif ?>
 	</div>
+	
 	
 	<div class="form-group <?if(isset($errors['Addresses'])) echo 'has-error has-feedback' ?> ">
 		<label class="control-label" for="Addresses">Address:</label>

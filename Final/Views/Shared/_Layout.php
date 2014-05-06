@@ -65,13 +65,14 @@
 				</form>
 			</li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, <?= isset($user) ? $user['FirstName'] : ' Guest'?> <b class="caret"></b></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">My Account</a></li>
-	            <li><a href="#">My Orders</a></li>
-	            <li><a href="#">Something else here</a></li>
+	          	<? foreach($links as $key=> $value) {
+	          		$url = $shortcut . $value['link']; ?>
+	            <li><a href="<?=$url?>"><?=$value['name']?></a></li>
+	            <? } ?>
 	            <li class="divider"></li>
-	            <li><a href="#">Admin Options</a></li>
+	            <li><a href="Products.php">Front End</a></li>
 	          </ul>
 	        </li>
 	      </ul>

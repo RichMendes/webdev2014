@@ -109,8 +109,17 @@
 	</div>
 	
 	<div class="form-group <?if(isset($errors['Users_id'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="Users_id">(What to do here?) Users_id:</label>
-		<input class="required form-control" type="text" name="Users_id" id="Users_id" value="<?=$model['Users_id']?>" placeholder="Users_id" />
+		<label class="control-label" for="Users_id">User:</label>
+		
+		<select size="1" class="required form-control" name="Users_id" id="Users_id">
+			<option value="">--User--</option>
+			<? foreach (Addresses::GetUsers() as $row): ?>
+				<option value="<?=$row['id']?>" <?if($model['Users_id']==$row['id']) echo 'selected=true'?>>
+					<?=$row['LastName']?>, <?=$row['FirstName']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
 		<? if(isset($errors['Users_id'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span ><?=$errors['Users_id']?></span>

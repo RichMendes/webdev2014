@@ -43,6 +43,20 @@
 				}
 			}
 			
+			static public function GetOrders($id = null){
+				$sql = "SELECT O.id, O.User_id
+							FROM 2014Spring_Orders as O ";
+				$results = fetch_all($sql);
+				return $results;
+			}
+			
+			static public function GetProducts($id = null){
+				$sql = "SELECT P.id, P.Name, P.Price
+							FROM 2014Spring_Products as P ";
+				$results = fetch_all($sql);
+				return $results;
+			}
+			
 			static public function Save(&$row) {
 				$conn = GetConnection();
 				

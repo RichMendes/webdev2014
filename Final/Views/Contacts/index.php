@@ -26,7 +26,7 @@
 			<tr>
 				<th>Contact Method</th>
 				<th>Value</th>
-				<th>Users Name</th>
+				<th>User's Name</th>
 				<th>Edit</th>
 			</tr>
 		</thead>
