@@ -31,19 +31,26 @@
 				return fetch_all($sql);
 			}
 			
+			static public function GetSupliers() {
+				$sql = "SELECT * FROM 2014Spring_Supliers ";
+				return fetch_all($sql);
+			}
+			
 			static public function Save(&$row) {
 				$conn = GetConnection();
 				
 				$row2 = escape_all($row, $conn); //you need to do this so you clean up input (prevents SQL injection)
 				if (!empty($row['id'])) {
 					$sql = "Update 2014Spring_Products
-							set U.FirstName='$row2[FirstName]', U.LastName='$row2[LastName]', U.Password='$row2[Password]', 
-							U.fbid='$row2[fbid]', UserType='$row2[UserType]'
+							set Suplier_id='$row2[Suplier_id]', Name='$row2[Name]', Price='$row2[Price]', 
+							Description='$row2[Description]', Picture_Url='$row2[Picture_Url]', 
+							Catergory_Keyword_id='$row2[Catergory_Keyword_id]'
 							WHERE id = $row2[id]";
 				}else {
 					$sql = "INSERT INTO 2014Spring_Products 
-						(created_at, FirstName, LastName, Password, fbid, UserType) 
-						VALUES (current_timestamp, '$row2[FirstName]', '$row2[LastName]', '$row2[Password]', '$row2[fbid]', '$row2[UserType]')";
+						(created_at, Suplier_id, Name, Password, fbid, UserType) 
+						VALUES (current_timestamp, '$row2[Suplier_id]', '$row2[Name]', '$row2[Price]', '$row2[Description]',
+							 '$row2[Picture_Url]', '$row2[Catergory_Keyword_id]')";
 				}	
 						
 				$results = $conn->query($sql);
@@ -83,19 +90,24 @@
 			
 			static public function Validate($row) {
 				$errors = array();
-				//implement the regular Validate
-				if(isset($row[''])) { //Account
-					//validate the whole god damn thing.... FML
-				}
-				else if(isset($row['Addresses'])) {	//Orders
-					if(!is_numeric($row['Addresses'])) $errors['Addresses'] = "must be a number";
-					if(empty($row['Addresses'])) $errors['Addresses'] = "is required";
-				}
-				else if(isset($row[''])) { //Items
-					
-				}
+				
+				if(empty($row['Suplier_id'])) $errors['Suplier_id'] = "is required";
+				if(!is_numeric($row['Suplier_id'])) $errors['Suplier_id'] = "must be a number";
+				
+				if(empty($row['Name'])) $errors['Name'] = "is required";
+				
+				if(empty($row['Price'])) $errors['Price'] = "is required";
+				if(!is_numeric($row['Price'])) $errors['Price'] = "must be a number";
+				
+				if(empty($row['Picture_Url'])) $errors['Picture_Url'] = "is required";
+				
+				if(empty($row['Catergory_Keyword_id'])) $errors['Catergory_Keyword_id'] = "is required";
+				if(!is_numeric($row['Catergory_Keyword_id'])) $errors['Catergory_Keyword_id'] = "must be a number";
+				
 				return count($errors) > 0 ? $errors : false;			
 			}
+			
+			
 			
 			//	ACCOUTNTS
 			static public function GetAccountInfo($id = null){

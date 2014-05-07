@@ -1,9 +1,9 @@
-	<?
+<?
 		$id = $_REQUEST['id'];
 	?>
 	<link rel="stylesheet" type="test/css" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css" />
 	<h2>
-		List of Supliers
+		List of Order Items
 	</h2>
 	
 	<style type="text/css">
@@ -24,21 +24,27 @@
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>Suplier Id</th>
-				<th>Name</th>
+				<th>Order Id</th>
+				<th>Product Id</th>
+				<th>Product Name</th>
+				<th>Customer's Name</th>
+				<th>Address</th>
 				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
 			
 			<? foreach ($model as $row): ?>
-				<tr class="<?=$id==$row['id'] ? "highlighted" : "" ?>">
-					<td><?=$row['id']?></td>
-					<td><?=$row['Name']?></td>
+				<tr>
+					<td><?=$row['Order_id']?></td>
+					<td><?=$row['Product_id']?></td>
+					<td><?=$row['ProductName']?></td>
+					<td><?=$row['LastName']?>, <?=$row['FirstName']?></td>
+					<td><?=$row['Addresses']?></td>
 					<td>
 						<div class="btn-grou[]">
 							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=details&id=<?=$row['id']?>"></a>
+							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
 							<a class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=delete&format=json&id=<?=$row['id']?>"></a>
 						</div>
 					</td>
@@ -83,7 +89,7 @@
 					event.preventDefault();
 					$.get(this.href, function(data){
 						
-						if(confirm("Are you sure that you want to delete " + data.data.FirstName + " " + data.data.LastName + "'s Order?")){
+						if(confirm("Are you sure that you want to delete " + data.data.FirstName + " " + data.data.LastName + "'s Address?")){
 							$.post(that.href, function(data){
 								if(data.success){
 									//msg user success

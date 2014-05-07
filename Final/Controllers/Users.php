@@ -14,7 +14,7 @@
 			$model = Users::Get($_REQUEST['id']);
 			break;
 		case 'details':
-			$model = Users::Get($_REQUEST['id']);
+			$model = Users::GetDetails($_REQUEST['id']);
 			$view = 'details';
 			break;
 		case 'save':
@@ -60,7 +60,15 @@
 			include __DIR__ . "/../Views/Users/$view.php";			
 			break;
 		default:
-			$view = __DIR__ . "/../Views/Users/$view.php";	
+			if($view == 'editAddress'){
+				$view = __DIR__ . "/../Views/Addresses/edit.php";
+			}
+			else if($view == 'editContact'){
+				$view = __DIR__ . "/../Views/Contacts/edit.php";
+			}
+			else {
+				$view = __DIR__ . "/../Views/Users/$view.php";	
+			}
 			include __DIR__ . "/../Views/Shared/_Layout.php";
 			break;
 	}

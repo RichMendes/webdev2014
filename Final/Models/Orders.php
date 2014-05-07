@@ -34,6 +34,19 @@
 				}
 			}
 			
+			static public function GetItems($id = null) {
+				$sql = "SELECT I.* , O.id as Order_id, P.id as Product_id, P.Name as ProductName, U.FirstName,
+							U.LastName, A.Addresses
+						FROM 2014Spring_Order_Items I
+							LEFT JOIN 2014Spring_Orders O ON O.id = I.Order_id
+							LEFT JOIN 2014Spring_Users U ON U.id = O.User_id
+							LEFT JOIN 2014Spring_Addresses A ON O.Address_id = A.id
+							LEFT JOIN 2014Spring_Products P ON I.Product_id = P.id
+						WHERE I.Order_id = $id";
+				
+				return fetch_all($sql);
+			}
+			
 			static public function GetUsers($id = null){
 				$sql = "SELECT U.id, U.FirstName, U.LastName
 							FROM 2014Spring_Users as U ";

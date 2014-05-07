@@ -24,6 +24,15 @@
 				}
 			}
 			
+			static public function GetProducts($id = null)  {
+				$sql = "SELECT S.Name as SuplierName, S.id, P.Name as ProductName, P.Price, P.Description, P.Picture_Url, P.Catergory_Keyword_id, P.id as Product_id
+							FROM 2014Spring_Supliers S
+							LEFT JOIN 2014Spring_Products P ON P.Suplier_id = S.id
+						WHERE S.id = $id";
+						
+				return fetch_all($sql);
+			}
+			
 			static public function Save(&$row) {
 				$conn = GetConnection();
 				

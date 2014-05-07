@@ -32,7 +32,7 @@
 
 	<div class="modal-header">
 		<a href="?" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-		<h4 class="modal-title">Edit: <?=$model['FirstName']?> <?=$model['LastName']?></h4>
+		<h4 class="modal-title">Edit: <?=$model['Name']?></h4>
 	</div>
 
 	<ul class="error">
@@ -46,49 +46,71 @@
 	
 	<input type="hidden" name="id" value="<?=$model['id']?>" />
 	
-	<div class="form-group <?if(isset($errors['FirstName'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="FirstName">First Name:</label>
-		<input class="required form-control" type="text" name="FirstName" id="FirstName" value="<?=$model['FirstName']?>" placeholder="First Name" />
-		<? if(isset($errors['FirstName'])): ?>
+	<div class="form-group <?if(isset($errors['Name'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Name">Name:</label>
+		<input class="required form-control" type="text" name="Name" id="Name" value="<?=$model['Name']?>" placeholder="Name" />
+		<? if(isset($errors['Name'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-			<span ><?=$errors['FirstName']?></span>
+			<span ><?=$errors['Name']?></span>
 		<? endif ?>
 	</div>
 	
-	<div class="form-group <?if(isset($errors['LastName'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="LastName">Last Name:</label>
-		<input class="required form-control" type="text" name="LastName" id="LastName" value="<?=$model['LastName']?>" placeholder="Last Name" />
-		<? if(isset($errors['LastName'])): ?>
+	<div class="form-group <?if(isset($errors['Price'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Price">Price:</label>
+		<input class="required form-control" type="text" name="Price" id="Price" value="<?=$model['Price']?>" placeholder="Price" />
+		<? if(isset($errors['Price'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-			<span ><?=$errors['LastName']?></span>
+			<span ><?=$errors['Price']?></span>
 		<? endif ?>
 	</div>
 	
 	<div class="form-group">
-		<label class="control-label" for="Password">Password:</label>
-		<input class="form-control" type="password" name="Password" id="Password" value="<?=$model['Password']?>" placeholder="Password" />
+		<label class="control-label" for="Description">Description:</label>
+		<input class="form-control" type="Description" name="Description" id="Description" value="<?=$model['Description']?>" placeholder="Description" />
 	</div>
 	
-	<div class="form-group">
-		<label class="control-label" for="fbid">fbid:</label>
-		<input class="form-control" type="text" name="fbid" id="fbid" value="<?=$model['fbid']?>" placeholder="fbid" />
+	<div class="form-group <?if(isset($errors['Picture_Url'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Picture_Url">Picture_Url:</label>
+		<input class="required form-control" type="text" name="Picture_Url" id="Picture_Url" value="<?=$model['Picture_Url']?>" placeholder="Picture_Url" />
+		<? if(isset($errors['Picture_Url'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Picture_Url']?></span>
+		<? endif ?>
 	</div>
 
-	<div class="form-group <?if(isset($errors['UserType'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="UserType">User Type:</label>
+	<div class="form-group <?if(isset($errors['Catergory_Keyword_id'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Catergory_Keyword_id">Catergory:</label>
 		
-		<select size="1" class="required form-control" name="UserType" id="UserType">
-			<option value="">--User Type--</option>
-			<? foreach (Keywords::SelectListFor(10) as $row): ?>
-				<option value="<?=$row['id']?>">
+		<select size="1" class="required form-control" name="Catergory_Keyword_id" id="Catergory_Keyword_id">
+			<option value="">--Catergory--</option>
+			<? foreach (Keywords::SelectListFor(13) as $row): ?>
+				<option value="<?=$row['id']?>" <?if($model['Catergory_Keyword_id']==$row['id']) echo 'selected=true'?>>
 					<?=$row['Name']?>
 				</option>
 			<? endforeach; ?>
 		</select>
 		
-		<? if(isset($errors['UserType'])): ?>
+		<? if(isset($errors['Catergory_Keyword_id'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-			<span ><?=$errors['UserType']?></span>
+			<span ><?=$errors['Catergory_Keyword_id']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['Suplier_id'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Suplier_id">Suplier:</label>
+		
+		<select size="1" class="required form-control" name="Suplier_id" id="Suplier_id">
+			<option value="">--Supliers--</option>
+			<? foreach (Products::GetSupliers() as $row): ?>
+				<option value="<?=$row['id']?>" <?if($model['Suplier_id']==$row['id']) echo 'selected=true'?>>
+					<?=$row['Name']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
+		<? if(isset($errors['Suplier_id'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Suplier_id']?></span>
 		<? endif ?>
 	</div>
 	

@@ -45,7 +45,7 @@
 				$links['Contacts'] = array('class' => 'contacts-menu', 'link' => 'Contacts.php', 'name' => 'Contacts');
 				$links['Orders'] = array('class' => 'orders-menu', 'link' => 'Orders.php', 'name' => 'Orders');
 				$links['Items'] = array('class' => 'items-menu', 'link' => 'Items.php', 'name' => 'Order Items');
-				$links['Products'] = array('class' => 'products-menu', 'link' => 'Products.php', 'name' => 'Products');
+				$links['Products'] = array('class' => 'products-menu', 'link' => 'Products.php?action=index', 'name' => 'Products');
 				$links['Supliers'] = array('class' => 'supliers-menu', 'link' => 'Supliers.php', 'name' => 'Supliers');
 				 
 				foreach ($links as $key => $value) {

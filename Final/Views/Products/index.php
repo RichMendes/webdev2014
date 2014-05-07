@@ -24,11 +24,13 @@
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>Supplier ID</th>
-				<th>Product Category ID</th>
+				
 				<th>Name</th>
 				<th>Price</th>
+				<th>Description</th>
 				<th>Picture URL</th>
+				<th>Supplier</th>
+				<th>Category</th>
 				<th>Edit</th>
 			</tr>
 		</thead>
@@ -36,15 +38,22 @@
 			
 			<? foreach ($model as $row): ?>
 				<tr class="<?=$id==$row['id'] ? "highlighted" : "" ?>">
-					<td><?=$row['Suplier_id']?></td>
-					<td><?=$row['Catergory_Keyword_id']?></td>
+					
 					<td><?=$row['Name']?></td>
 					<td><?=$row['Price']?></td>
+					<td><?=$row['Description']?></td>
 					<td><?=$row['Picture_Url']?></td>
+					<? foreach (Products::GetSupliers() as $row1): ?>
+						<?if($row['Suplier_id'] == $row1['id']):?><td><?=$row1['Name']?></td><?endif;?>
+					<?endforeach;?>
+					<? foreach (Keywords::SelectListFor(13) as $row2): ?>
+						<?if($row['Catergory_Keyword_id'] == $row2['id']):?><td><?=$row2['Name']?></td><?endif;?>
+					<?endforeach;?>
+					
 					<td>
 						<div class="btn-group">
 							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
+							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open disabled" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
 							<a class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=delete&format=json&id=<?=$row['id']?>"></a>
 						</div>
 					</td>

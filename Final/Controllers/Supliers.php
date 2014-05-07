@@ -13,6 +13,10 @@
 		case 'edit':
 			$model = Supliers::Get($_REQUEST['id']);
 			break;
+		case 'details':
+			$model = Supliers::GetProducts($_REQUEST['id']);
+			$view = 'details';
+			break;
 		case 'save':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
 			$errors = Supliers::Validate($_REQUEST);

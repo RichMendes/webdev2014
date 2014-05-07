@@ -13,6 +13,10 @@
 		case 'edit':
 			$model = Orders::Get($_REQUEST['id']);
 			break;
+		case 'details':
+			$model = Orders::GetItems($_REQUEST['id']);
+			$view = 'details';
+			break;
 		case 'save':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
 			$errors = Orders::Validate($_REQUEST);

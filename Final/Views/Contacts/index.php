@@ -40,7 +40,7 @@
 					<td>
 						<div class="btn-grou[]">
 							<a class="btn btn-sm btn-default glyphicon glyphicon-edit" title="Edit" href="?action=edit&id=<?=$row['id']?>"></a>
-							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="?action=edit&id=<?=$row['id']?>"></a>
+							<a class="btn btn-sm btn-default glyphicon glyphicon-eye-open" title="Details" href="http://cs.newpaltz.edu/~n02004019/2014Spring/Final/Controllers/Users.php?action=details&id=<?=$row['User_id']?>"></a>
 							<a class="btn btn-sm btn-default glyphicon glyphicon-trash" title="Delete" href="?action=delete&format=json&id=<?=$row['id']?>"></a>
 						</div>
 					</td>

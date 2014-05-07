@@ -25,6 +25,41 @@
 				}
 			}
 			
+			static public function GetDetails($id) {
+				$sql = "SELECT U.id, U.FirstName, U.LastName, U.Password, U.fbid, K.Name AS UserType
+ 						FROM 2014Spring_Users U
+ 							JOIN 2014Spring_Keywords K ON U.UserType = K.id
+  						WHERE U.id = $id";
+				
+				$full_results[0] = array(fetch_all($sql));  // [0] = User Info
+				
+				$sql = "SELECT A.Addresses, A.City, A.State, A.Zip, A.Country, KA.Name AS AddressType, A.id AS AddressId, A.id as Aid
+						FROM 2014Spring_Users U
+							LEFT JOIN 2014Spring_Addresses A ON U.id = A.Users_id
+							LEFT JOIN 2014Spring_Keywords KA ON A.AddressType = KA.id
+						WHERE U.id = $id";
+						
+				$full_results[1] = fetch_all($sql);	// [1] = Address Info
+				
+				$sql = "SELECT C.Value, KC.Name AS ContactMethodType, C.id as Cid
+						FROM 2014Spring_Users U
+							LEFT JOIN 2014Spring_ContactMethods C ON U.id = C.User_id
+ 							LEFT JOIN 2014Spring_Keywords KC ON C.ContactMethodType = KC.id
+						WHERE U.id = $id";
+						
+				$full_results[2] = fetch_all($sql);	//	[2] = Order Info
+				 
+				$sql = "SELECT O.id as Order_id, O.created_at as OrderDate, A.Addresses as OrderAddress
+						FROM 2014Spring_Users U
+							LEFT JOIN 2014Spring_Orders O on O.User_id = U.id
+							LEFT JOIN 2014Spring_Addresses A on O.Address_id = A.id
+						WHERE U.id = $id";
+						
+				$full_results[3] = fetch_all($sql);
+						
+				return 	$full_results;
+			}
+			
 			static public function Save(&$row) {
 				$conn = GetConnection();
 				
