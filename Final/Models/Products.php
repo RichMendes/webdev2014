@@ -48,7 +48,7 @@
 							WHERE id = $row2[id]";
 				}else {
 					$sql = "INSERT INTO 2014Spring_Products 
-						(created_at, Suplier_id, Name, Password, fbid, UserType) 
+						(created_at, Suplier_id, Name, Price, Description, Picture_Url, Catergory_Keyword_id) 
 						VALUES (current_timestamp, '$row2[Suplier_id]', '$row2[Name]', '$row2[Price]', '$row2[Description]',
 							 '$row2[Picture_Url]', '$row2[Catergory_Keyword_id]')";
 				}	
@@ -111,6 +111,8 @@
 			
 			//	ACCOUTNTS
 			static public function GetAccountInfo($id = null){
+				if($id == null)
+					return;
 				$sql = "SELECT U.id, U.FirstName, U.LastName, U.Password, U.fbid, K.Name AS UserType, A.Addresses, A.City, A.State, A.Zip, A.Country, KA.Name AS AddressType, A.id AS AddressId, C.Value, KC.Name AS ContactMethodType
  						FROM 2014Spring_Users U
  							JOIN 2014Spring_Keywords K ON U.UserType = K.id
@@ -120,7 +122,7 @@
  							LEFT JOIN 2014Spring_Keywords KC ON C.ContactMethodType = KC.id
   						WHERE U.id = $id ";
 				$results = fetch_all($sql);
-				return $results[0];
+				return $results;
 			}
 			
 			static public function SaveInfo(&$row) {
@@ -133,22 +135,58 @@
 							fbid='$row2[fbid]', UserType='$row2[UserType]', 
 							A.Addresses='$row2[Addresses]', A.City='$row2[City]', A.State='$row2[State]', 
 							A.Zip='$row2[Zip]', A.AddressType='$row2[AddressType]', A.Country='$row2[Country]',
-							ContactMethodType='$row2[ContactMethodType]', Value='$row2[Value]'
+							ContactMethodType='$row2[ContactMethodType]', Value='$row2[Value]', A.id = '$row2[AddressId]' 
 							WHERE U.id = $row2[id] AND
-									A.Users_id = $row2[id] AND
-									A.id = $row2[AddressId] AND
-									C.User_id = $row2[id] ";
-				}else {
-					$sql = "";
-				}	
-						
-				$results = $conn->query($sql);
-				$error = $conn->error;
-				
-				if(!$error && empty($row['id'])){
-					$row['id'] = $conn->insert_id;
+									A.Users_id = '$row2[id]' AND
+									A.id = '$row2[AddressId]' AND
+									C.User_id = '$row2[id]'; ";
+					
+					$results = $conn->query($sql); //$results is unused!
+					$error = $conn->error;
+					
+					if(!$error && empty($row['id'])){
+						$row['id'] = $conn->insert_id;
+					}
+									
 				}
 				
+				else {	//create new account
+					$sql = "INSERT INTO 2014Spring_Users 
+							(created_at, FirstName, LastName, Password, fbid, UserType) 
+						VALUES (current_timestamp, '$row2[FirstName]', '$row2[LastName]',
+						 	'$row2[Password]', '$row2[fbid]', '$row2[UserType]') ";
+						 	
+					$results = $conn->query($sql); //create the user and find any errors
+					$error = $conn->error;
+					if(!$error && empty($row['id'])){
+						$row2['id'] = $conn->insert_id;
+					}
+					
+						     // do something here where you run the users creation
+							 // then you get the user's id and then continue from there 
+							 // replacing $row2[id] with the id you get 
+					
+					if(!$error) {		
+						$sql = "INSERT INTO 2014Spring_ContactMethods 
+							(created_at, ContactMethodType, Value, User_id) 
+							VALUES (current_timestamp, '$row2[ContactMethodType]', 
+									'$row2[Value]', '$row2[id]') ";
+						
+						$results = $conn->query($sql); //create the contact method and find any errors
+						$error = $conn->error;
+									
+						if($row2['Addresses'] != ''){
+							$sql = "INSERT INTO 2014Spring_Addresses 
+							(created_at, Addresses, City, State, Zip, AddressType, Users_id, Country) 
+							VALUES (current_timestamp, '$row2[Addresses]', '$row2[City]', '$row2[State]', '$row2[Zip]',
+							 '$row2[AddressType]', '$row2[id]', '$row2[Country]') ";
+							 
+							$results = $conn->query($sql); //create the address and find any errors
+							$error = $conn->error;
+						}
+					}
+				}	
+					
 				$conn->close();
 				
 				return $error ? array ('sql error' => $error) : false;
@@ -173,7 +211,7 @@
 				
 				//	Contact Info
 				if(empty($row['ContactMethodType'])) $errors['ContactMethodType'] = "is required";
-				if(empty($row['ContactMethodType'])) $errors['ContactMethodType'] = "is required";
+				if(empty($row['Value'])) $errors['Value'] = "is required";
 				
 				return count($errors) > 0 ? $errors : false;			
 			}
@@ -206,6 +244,39 @@
 								WHERE A.Users_id = $id";
 				$results = fetch_all($sql);
 				return $results;
+			}
+			
+			static public function PlaceOrder($row, $cart) {
+				$conn = GetConnection();
+				
+				$row2 = escape_all($row, $conn);
+				$sql = "INSERT INTO 2014Spring_Orders
+							(created_at, User_id, Address_id)
+							VALUES (current_timestamp, '$row2[uid]', '$row2[Addresses]') ";
+								
+				$results = $conn->query($sql);
+				$error = $conn->error;
+				
+				if(!$error){
+					$row['id'] = $conn->insert_id;
+				}
+				
+				foreach ($cart as $item){		//continue from here!!!!!
+					if(!$errors) {
+						$sql = "INSERT INTO 2014Spring_Order_Items
+								(created_at, Order_id, Product_id)
+								VALUES (current_timestamp, '$row[id]', '$item') ";
+						$results = $conn->query($sql); //add specific item to order
+						$error = $conn->error;
+					}
+					else {
+						return array ('sql error' => $error);
+					}
+				}
+				
+				$conn->close();
+				
+				return $error ? array ('sql error' => $error) : false;
 			}
 			
 			static public function SaveOrder(&$row) {

@@ -12,11 +12,18 @@
 			background-color: #FFFFAA;
 		}
 	</style>
-	
+	<? //print_r($model)?>
 	<? if(isset($_REQUEST['sub_action'])): ?>
 		<div class="alert alert-success alert-dismissable">
 			<a class="close">&times;</a>
 			The row has been <?=$_REQUEST['sub_action']?> successfully!
+		</div>
+	<? endif; ?>
+	
+	<? if ($orderPlaced): ?>
+		<div class="alert alert-success alert-dismissable">
+			<a class="close">&times;</a>
+			Your order has been placed!
 		</div>
 	<? endif; ?>
 	

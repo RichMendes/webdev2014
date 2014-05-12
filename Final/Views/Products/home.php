@@ -24,7 +24,7 @@
 	
 	#shopping-cart-list .scrolling {
 		overflow-y: scroll;
-		height: 95%;
+		height: 90%;
 		border-bottom: 1px solid black;
 	}
 	
@@ -38,11 +38,15 @@
 		background-color: maroon; 
 	}
 </style>
-
+	<?//print_r($model)?>
 	<? if(isset($_REQUEST['sub_action'])): ?>
 		<div class="alert alert-success alert-dismissable">
 			<a class="close">&times;</a>
-			The row has been <?=$_REQUEST['sub_action']?> successfully!
+			<?if($_REQUEST['sub_action'] != 'updated_info'):?>
+				The row has been <?=$_REQUEST['sub_action']?> successfully!
+			<?else:?>
+				Your account information has been updated!
+			<? endif ?>
 		</div>
 	<? endif; ?>
 
@@ -68,8 +72,10 @@
 		</div>
 	</div>	
 	
+	<form action="?action=selectAddress&id=<?=$model['id']?>" method="post" data-bind="submit: doSomething">
 	<div id="shopping-cart-list" class="closed" >
 		<div class="scrolling"  data-bind="foreach: cart" >
+			<input type="hidden" data-bind="value: id, uniqueName: true" />
 			<div class="well well-sm clearfix">
 				<img alt="item image" data-bind="attr: {src: Picture_Url}" />
 				<h6 data-bind="text: Name"></h6>
@@ -83,9 +89,12 @@
 		</div>
 		<div>
 			Total: $ <span data-bind="text: cartTotal"></span>
+		<button type="submit" class="btn btn-warning btn-xs pull-right" style="margin:5px" value="Save">
+					Check Out
+		</button>
 		</div>
 	</div>
-
+	</form>
 
 <script type="text/template" id="cart-tmpl">
 	<ul class="nav navbar-nav navbar-right ">
@@ -132,14 +141,22 @@
 					},
 					toggleCartList: function(){
 						$("#shopping-cart-list").toggleClass("closed");
-					}
+					},
+					//help: http://stackoverflow.com/questions/5035547/pass-javascript-array-php
+					checkOut: function(){
+					},
+					doSomething : function() {
+			            return true;
+			        }
+					
 				}
+				
 				vm.cartTotal = ko.computed(function(){
 						var tot = 0;
 						$.each(vm.cart(), function(i,x){
 							tot += +x.Price;
 						})
-						return tot;
+						return tot.toFixed(2);
 				});
 				ko.applyBindings(vm);
 				
@@ -148,5 +165,6 @@
 						vm.categoryList(results.data);
 					})
 			});
+			
 		</script>
 	<? } ?>

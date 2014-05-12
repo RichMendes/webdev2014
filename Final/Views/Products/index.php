@@ -37,7 +37,7 @@
 		<tbody>
 			
 			<? foreach ($model as $row): ?>
-				<tr class="<?=$id==$row['id'] ? "highlighted" : "" ?>">
+				<tr class="<?=$_REQUEST['pid']==$row['id'] ? "highlighted" : "" ?>">
 					
 					<td><?=$row['Name']?></td>
 					<td><?=$row['Price']?></td>

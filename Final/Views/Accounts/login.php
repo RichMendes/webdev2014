@@ -28,6 +28,16 @@
 		}
 	}
 </style>
+
+<? if(isset($_REQUEST['welcome'])) : ?>
+		<div class="alert alert-success alert-dismissable">
+			<a class="close">&times;</a>
+				Your account has been created! Please sign in below.
+		</div>
+<? endif ?>
+
+<h4>New User? <a href="?action=new" class="cmd-new">click here</a> to get started!</h4>
+
 	      <div class="modal-header">
 	        <a href="Products.php" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 	        <h4 class="modal-title">Login</h4>
@@ -64,3 +74,13 @@
 			<a href="Products.php" data-dismiss="modal">Cancel</a>
 	      </div>
     </form>
+    
+<? function JavaScripts(){ ?>
+	<script type="text/javascript">
+		$(function(){
+			$(".close").click(function(){
+					$(this).closest(".alert").slideUp();
+				})
+		})
+	</script>
+<? } ?>

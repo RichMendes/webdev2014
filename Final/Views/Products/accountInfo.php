@@ -29,6 +29,20 @@
 	}
 </style>
 
+	<? 
+	   //print_r($model);
+	   if(isset($model)) {
+		   $prim = $model[0];
+		   $sec = $model[1];
+		   $model = $prim;
+	   }
+	   //print_r($errors);
+	?>
+	<?//print_r($model)?>
+</br>	
+	<?//print_r($prim)?>
+</br>
+	<?//print_r($sec)?>
 	<div class="modal-header">
 		<a href="?" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
 		<h4 class="modal-title">Edit <?=$model['FirstName']?> <?=$model['LastName']?>'s Account Info</h4>
@@ -96,9 +110,16 @@
 		<? endif ?>
 	</div>
 	
-	
+	<? $equal = FALSE;
+		if(isset($sec)) {
+		if($sec['Addresses'] == $prim['Addresses'])
+			$equal = FALSE;
+		else {
+			$equal = TRUE;
+		}
+	}?>
 	<div class="form-group <?if(isset($errors['Addresses'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="Addresses">Address:</label>
+		<label class="control-label" for="Addresses"><?if($equal){echo 'Primary';}?> Address:</label>
 		<input class="required form-control" type="text" name="Addresses" id="Addresses" value="<?=$model['Addresses']?>" placeholder="Addresses" />
 		<? if(isset($errors['Addresses'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -160,17 +181,82 @@
 		<? endif ?>
 	</div>
 	
-	<div class="form-group <?if(isset($errors['Value'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="Value">Value:</label>
-		<input class="required form-control" type="text" name="Value" id="Value" value="<?=$model['Value']?>" placeholder="Value" />
-		<? if(isset($errors['Value'])): ?>
+	<!--				SECONDARY Address						-->
+	<?if($equal):?>
+	<div class="form-group <?if(isset($errors['Addresses'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Addresses">Secondary Address:</label>
+		<input class="required form-control" type="text" name="Addresses" id="Addresses" value="<?=$sec['Addresses']?>" placeholder="Addresses" />
+		<? if(isset($errors['Addresses'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-			<span ><?=$errors['Value']?></span>
+			<span ><?=$errors['Addresses']?></span>
 		<? endif ?>
 	</div>
 	
+	<div class="form-group <?if(isset($errors['City'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="City">City:</label>
+		<input class="required form-control" type="text" name="City" id="City" value="<?=$sec['City']?>" placeholder="City" />
+		<? if(isset($errors['City'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['City']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['State'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="State">State:</label>
+		<input class="required form-control" type="text" name="State" id="State" value="<?=$sec['State']?>" placeholder="State" />
+		<? if(isset($errors['State'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['State']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['Zip'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Zip">Zip Code:</label>
+		<input class="required form-control" type="text" name="Zip" id="Zip" value="<?=$sec['Zip']?>" placeholder="Zip" />
+		<? if(isset($errors['Zip'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Zip']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['Country'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Country">Country:</label>
+		<input class="required form-control" type="text" name="Country" id="Country" value="<?=$sec['Country']?>" placeholder="Country" />
+		<? if(isset($errors['Country'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Country']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['AddressType'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="AddressType">Address Type:</label>
+		
+		<select size="1" class="required form-control" name="AddressType" id="AddressType">
+			<option value="">--Address Type--</option>
+			<? foreach (Keywords::SelectListFor(12) as $row): ?>
+				<option value="<?=$row['id']?>" <?if($sec['AddressType']==$row['Name']) echo 'selected=true'?>>
+					<?=$row['Name']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
+		<? if(isset($errors['AddressType'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['AddressType']?></span>
+		<? endif ?>
+	</div>
+	<? endif ?>
+	
+	<? $equal = FALSE;
+		if(isset($sec)) {
+		if($sec['ContactMethodType'] == $prim['ContactMethodType'])
+			$equal = FALSE;
+		else {
+			$equal = TRUE;
+		}
+	}?>
 	<div class="form-group <?if(isset($errors['ContactMethodType'])) echo 'has-error has-feedback' ?> ">
-		<label class="control-label" for="ContactMethodType">Contact Method Type:</label>
+		<label class="control-label" for="ContactMethodType"><?if($equal) echo 'Primary '?>Contact Method Type:</label>
 		
 		<select size="1" class="required form-control" name="ContactMethodType" id="ContactMethodType">
 			<option value="">--Contact Method Type--</option>
@@ -186,6 +272,45 @@
 			<span ><?=$errors['ContactMethodType']?></span>
 		<? endif ?>
 	</div>
+	
+	<div class="form-group <?if(isset($errors['Value'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Value">Value:</label>
+		<input class="required form-control" type="text" name="Value" id="Value" value="<?=$model['Value']?>" placeholder="Value" />
+		<? if(isset($errors['Value'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Value']?></span>
+		<? endif ?>
+	</div>
+	
+	<!--				SECONDARY Contact						-->
+	<? if($equal): ?>
+	<div class="form-group <?if(isset($errors['ContactMethodType'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="ContactMethodType">Secondary Contact Method Type:</label>
+		
+		<select size="1" class="required form-control" name="ContactMethodType" id="ContactMethodType">
+			<option value="">--Contact Method Type--</option>
+			<? foreach (Keywords::SelectListFor(11) as $row): ?>
+				<option value="<?=$row['id']?>" <?if($sec['ContactMethodType']==$row['Name']) echo 'selected=true'?>>
+					<?=$row['Name']?>
+				</option>
+			<? endforeach; ?>
+		</select>
+		
+		<? if(isset($errors['ContactMethodType'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['ContactMethodType']?></span>
+		<? endif ?>
+	</div>
+	
+	<div class="form-group <?if(isset($errors['Value'])) echo 'has-error has-feedback' ?> ">
+		<label class="control-label" for="Value">Value:</label>
+		<input class="required form-control" type="text" name="Value" id="Value" value="<?=$sec['Value']?>" placeholder="Value" />
+		<? if(isset($errors['Value'])): ?>
+			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ><?=$errors['Value']?></span>
+		<? endif ?>
+	</div>
+	<? endif ?>
 	
 	<div class="modal-footer">
 		<label class="control-label"></label>

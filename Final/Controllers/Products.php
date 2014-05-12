@@ -31,7 +31,7 @@
 				$errors = Products::Save($_REQUEST);
 			}
 			if(!$errors){
-				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
+				header("Location: ?action=index&sub_action=$sub_action&pid=$_REQUEST[id]");
 				die();
 			}else {
 				$model = $_REQUEST;
@@ -55,23 +55,32 @@
 			
 		//	ACCOUNT
 		case 'accountInfo':
-			Accounts::RequireLogin();
+			//Accounts::RequireLogin();
 			$model = Products::GetAccountInfo($_REQUEST['id']);
 			$layout = '_PublicLayout';
 			$view = 'accountInfo';
 			break;
 		case 'saveInfo':
-			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
+			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated_info';
 			$errors = Products::ValidateInfo($_REQUEST);
 			if(!$errors){
 				$errors = Products::SaveInfo($_REQUEST);
 			}
 			if(!$errors){
+				header("Location: ../Controllers/Accounts.php?welcome=true");
+				die();
+			}else {
+				$model = $_REQUEST;
+				$view = 'accountInfo';
+			}
+			break;
+			if(!$errors){
 				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
 				die();
 			}else {
 				$model = $_REQUEST;
-				$view = 'edit';
+				$layout = '_PublicLayout';
+				$view = 'accountInfo';
 			}
 			break;
 		
@@ -103,7 +112,36 @@
 				$view = 'editOrder';
 			}
 			break;
-		
+		case 'selectAddress':
+			Accounts::RequireLogin();
+			$_SESSION['cart'] = $_POST;
+			$model = Accounts::GetCurrentUser();
+			$layout = '_PublicLayout';
+			$view = 'selectAddress';
+		break;
+		case 'placeOrder':
+			Accounts::RequireLogin();
+			$errors = Products::PlaceOrder($_REQUEST, $_SESSION['cart']);
+			if(!$errors){
+				$model = Products::GetOrderInfo($_REQUEST['id']);
+				$layout = '_PublicLayout';
+				$orderPlaced = true;
+				$view = 'orderInfo';
+				unset($GLOBALS[_SESSION]['cart']);
+			}
+			else {
+				$model = $_REQUEST;
+				$layout = '_PublicLayout';
+				$view = 'home';
+			}
+			break;
+		case 'clearCart':
+			unset($GLOBALS[_SESSION]['cart']);
+			$model = Accounts::GetCurrentUser();
+			$layout = '_PublicLayout';
+			$view = 'home';
+			break;
+			
 		//	ORDER ITEMS
 		case 'orderItems':
 			Accounts::RequireLogin();
@@ -159,6 +197,7 @@
 			break;
 			
 		default:
+			$model = Accounts::GetCurrentUser();
 			$layout = '_PublicLayout';
 			if($view == null) $view = 'home';
 	}

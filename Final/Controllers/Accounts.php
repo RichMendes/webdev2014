@@ -8,6 +8,10 @@
 	@$format 	= $_REQUEST['format'];
 	
 	switch ($action){
+		case 'new':
+			$view = 'accountInfo';
+			header("Location: ../Controllers/Products.php?action=accountInfo");
+			break;
 		case 'notAdmin':
 			$view = 'notAdmin';
 			$user = Accounts::GetCurrentUser();
@@ -46,7 +50,7 @@
 			include __DIR__ . "/../Views/Accounts/$view.php";			
 			break;
 		default:
-			$view = __DIR__ . "/../Views/Accounts/$view.php";	
+			$view = __DIR__ . "/../Views/Accounts/$view.php";
 			include __DIR__ . "/../Views/Shared/_PublicLayout.php";
 			break;
 	}
