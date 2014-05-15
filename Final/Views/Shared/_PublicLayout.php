@@ -142,10 +142,7 @@
 				
 			if (currentPage == "Products.php")
 				$(".products-menu").addClass("active");
-				
-			//if (currentPage == "Supliers.php")
-				//$(".supliers-menu").addClass("active");
-				
+			
 			$(".edit-info").click(function(event){
 					var that = this;
 					event.preventDefault();

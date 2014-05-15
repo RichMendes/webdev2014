@@ -25,6 +25,14 @@
 				}
 			}
 
+			static public function GetPlotkinData() {
+				$sql = "SELECT Zip 
+							From US_Zip_Codes";
+							
+				return fetch_all_plotkin($sql);
+				
+			}
+			
 			static public function GetCategories()
 			{
 				$sql = "SELECT id, Name FROM 2014Spring_Keywords WHERE Parent_id = 13";

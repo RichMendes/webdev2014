@@ -38,7 +38,7 @@
 		background-color: maroon; 
 	}
 </style>
-	<?//print_r($model)?>
+	<?print_r($model)?>
 	<? if(isset($_REQUEST['sub_action'])): ?>
 		<div class="alert alert-success alert-dismissable">
 			<a class="close">&times;</a>
@@ -64,7 +64,9 @@
 		    <h3 class="panel-title" data-bind="text: Name"></h3>
 		  </div>
 		  <div class="panel-body">
-				<img data-bind="attr: {src: Picture_Url}" class="img-thumbnail pull-right" alt="140x140" style="width: 140px; height: 140px;" >
+		  		<a data-bind="attr: {href: 'Products.php?action=picture&img='+Picture_Url}">
+				<img data-bind="attr: { src: Picture_Url }" class="img-thumbnail pull-right" alt="140x140" style="width: 140px; height: 140px;" >
+				</a>
 				<p data-bind="text: Description"></p>
 				<a class="btn btn-success" data-bind="click: $root.addToCart">Purchase</a>
 		  </div>
@@ -89,7 +91,7 @@
 		</div>
 		<div>
 			Total: $ <span data-bind="text: cartTotal"></span>
-		<button type="submit" class="btn btn-warning btn-xs pull-right" style="margin:5px" value="Save">
+		<button type="submit" class="btn btn-warning btn-xs pull-right" style="margin:5px; position:fixed" value="Save">
 					Check Out
 		</button>
 		</div>
@@ -114,6 +116,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
 		<script type="text/javascript">
 			$(function(){
+				
 				$(".navbar-collapse").append($("#cart-tmpl").html())
 				
 				$(".close").click(function(){

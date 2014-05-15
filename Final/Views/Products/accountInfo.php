@@ -323,11 +323,26 @@
 	<? function JavaScripts(){ global $model; ?>
 		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
+		<script type="text/javascript" src="../inc/typeahead.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				
 				$("form").validate();
-				$("#UserType").val(<?=$model['UserType']?>);
+				
+				
+				var zipCodes = new Bloodhound({
+				  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+				  queryTokenizer: Bloodhound.tokenizers.whitespace,
+				  remote: '../Products.php?action=query&format=query'
+				});
+				 
+				zipCodes.initialize();
+				
+				$('#Zip').typeahead(null, {
+				  name: 'Zip Codes',
+				  displayKey: 'value',
+				  source: zipCodes.ttAdapter()
+				});
 				
 			})
 		</script>

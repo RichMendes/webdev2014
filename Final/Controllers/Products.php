@@ -24,6 +24,11 @@
 			$model = Products::Get($_REQUEST['id']);
 			$view = 'details';
 			break;
+		case 'query':
+			$model = Products::GetPlotkinData();
+			$layout = '_PublicLayout';
+			$view = 'home';
+			break;
 		case 'save':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
 			$errors = Products::Validate($_REQUEST);
@@ -47,10 +52,15 @@
 			}
 			break;
 		case 'index':
-				$model = Products::Get($id, $category_id);
-				break;
+			$model = Products::Get($id, $category_id);
+			break;
 		case 'categories':
 			$model = Products::GetCategories();
+			break;
+		case 'picture':
+			$img = $_REQUEST['img'];
+			$layout = '_PublicLayout';
+			$view = 'picture';
 			break;
 			
 		//	ACCOUNT
@@ -206,6 +216,9 @@
 		case 'json':
 			$ret = array('success'=> empty($errors), 'errors'=> $errors, 'data'=> $model);
 			echo json_encode($ret);
+			break;
+		case 'query':
+			echo json_encode($model);
 			break;
 		case 'plain':
 			include __DIR__ . "/../Views/Products/$view.php";			
