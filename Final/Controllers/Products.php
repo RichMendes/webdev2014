@@ -25,7 +25,7 @@
 			$view = 'details';
 			break;
 		case 'query':
-			$model = Products::GetPlotkinData();
+			$model = Products::GetPlotkinData($_REQUEST['query'], $_REQUEST['type']);
 			$layout = '_PublicLayout';
 			$view = 'home';
 			break;

@@ -212,7 +212,7 @@
 	
 	<div class="form-group <?if(isset($errors['Zip'])) echo 'has-error has-feedback' ?> ">
 		<label class="control-label" for="Zip">Zip Code:</label>
-		<input class="required form-control" type="text" name="Zip" id="Zip" value="<?=$sec['Zip']?>" placeholder="Zip" />
+		<input class="required form-control" type="text" name="Zip" id="Zip" value="<?=$sec['Zip']?>" placeholder="Zip"/>
 		<? if(isset($errors['Zip'])): ?>
 			<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 			<span ><?=$errors['Zip']?></span>
@@ -331,17 +331,31 @@
 				
 				
 				var zipCodes = new Bloodhound({
-				  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+				  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('zip'),
 				  queryTokenizer: Bloodhound.tokenizers.whitespace,
-				  remote: '../Products.php?action=query&format=query'
+				  remote: '../Controllers/Products.php?action=query&format=query&type=zip&query=%QUERY'
 				});
 				 
 				zipCodes.initialize();
 				
 				$('#Zip').typeahead(null, {
-				  name: 'Zip Codes',
-				  displayKey: 'value',
+				  name: 'zip-code',
+				  displayKey: 'zip',
 				  source: zipCodes.ttAdapter()
+				});
+				
+				var states = new Bloodhound({
+				  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('state'),
+				  queryTokenizer: Bloodhound.tokenizers.whitespace,
+				  remote: '../Controllers/Products.php?action=query&format=query&type=state&query=%QUERY'
+				});
+				 
+				states.initialize();
+				
+				$('#State').typeahead(null, {
+				  name: 'states',
+				  displayKey: 'state',
+				  source: states.ttAdapter()
 				});
 				
 			})

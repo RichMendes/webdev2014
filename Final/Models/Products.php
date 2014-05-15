@@ -25,11 +25,21 @@
 				}
 			}
 
-			static public function GetPlotkinData() {
-				$sql = "SELECT Zip 
-							From US_Zip_Codes";
+			static public function GetPlotkinData($query = null, $type = null) {
+				if($type == 'zip') {
+				$sql = "SELECT *
+							From US_Zip_Codes
+							WHERE zip LIKE '$query%' ";
 							
 				return fetch_all_plotkin($sql);
+				}
+				elseif ($type = 'state') {
+					$sql = "SELECT *
+							From US_Zip_Codes
+							WHERE state LIKE '$query%' ";
+							
+				return fetch_all_plotkin($sql);
+				}
 				
 			}
 			
