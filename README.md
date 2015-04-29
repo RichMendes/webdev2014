@@ -2,6 +2,7 @@ webdev2014
 ==========
 
 Web Development Course Spring 2014
+http://cs.newpaltz.edu/~n02004019/2014Spring/Final/Controllers/Products.php
 
 This simple ecommerce website was created from the ground up using various languages including:
 PHP, JavaScript, Jquery, MySql, Bootstrap, HandlebarJS, AngularJS, HTML 5, and CSS.
